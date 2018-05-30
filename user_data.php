@@ -1,11 +1,11 @@
 <?php
 	
 	include_once 'Includes/db.php';
+	include_once 'mail.php';
 
 
 if(isset($_POST['submit'])){
 	$fullname = mysqli_real_escape_string($conn,$_POST['full-name']);
-	echo $fullname;
 	$username = mysqli_real_escape_string($conn,$_POST['user-name']);
 	$number = mysqli_real_escape_string($conn,$_POST['phone']);
 	$email = mysqli_real_escape_string($conn,$_POST['email']);
@@ -52,8 +52,10 @@ if(isset($_POST['submit'])){
 											mysqli_stmt_bind_param($dbcon,"ssss",$fullname,$username,$number,$email);
 											mysqli_stmt_execute($dbcon);
 										}
+										user_mail();
 										header("Location: thanks_registration.php?registration=success");
-										exit();
+		    							exit();
+
 
 								}
 							
@@ -64,68 +66,6 @@ if(isset($_POST['submit'])){
 	}
 
 }
-
-else{
-
-}
-
-
-
-
-
-
-	/*include_once 'Includes/db.php';
-
-	if(isset($_POST['submit'])){
-	$first = mysqli_real_escape_string($conn,$_POST['first-name']);
-	$last = mysqli_real_escape_string($conn,$_POST['last-name']);
-	$number = mysqli_real_escape_string($conn,$_POST['phone-number']);
-	$email = mysqli_real_escape_string($conn,$_POST['email']);
-	$sql = "INSERT INTO users (first_name,last_name,phone_number,email) VALUES (?,?,?,?);";
-	$dbcon = mysqli_stmt_init($conn);
-
-	// Check for Empty Inputs 
-
-		if(empty($first) || empty($last) ||empty($email)){
-			header("Location: registration.php?registration=empty");
-			exit();
-		}else{
-				if(!mysqli_stmt_prepare($dbcon,$sql)){
-					echo "SQL error";
-				}
-				else{
-					mysqli_stmt_bind_param($dbcon,"ssss",$first,$last,$number,$email);
-					mysqli_stmt_execute($dbcon);
-				}
-
-				header("Location: welcome.php?registration=success");
-				exit();
-		}
-
-	}
-
-      /*session_start();
-      $_SESSION['message'] = '';
-      $mysqli = new mysqli('localhost', 'root', '', 'donate');
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-          
-          $first_name = $mysqli->real_escape_string($_POST['first-name']);
-          $last_name = $mysqli->real_escape_string($_POST['last-name']);
-          $phone_number = $mysqli->real_escape_string($_POST['phone-number']);
-          $email = $mysqli->real_escape_string($_POST['email']);
-          
-          $sql = "INSERT INTO donor_registration(first_name,last_name,phone_number,email)" . "VALUES('$first_name','$last_name','$phone_number','$email')";
-          
-          if($mysqli->query($sql) === true){
-              $_SESSION['message'] = "Registration succesful!";
-              header("location: welcome.php");
-          }
-          else{
-              $_SESSION['message'] = "user could not be added!";
-          }
-          
-      }*/
-      
 
 
 

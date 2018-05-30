@@ -72,7 +72,7 @@
                                         <div class="input-group-prepend">
                                               <div class="input-group-text"><i class='fa fa-envelope' aria-hidden='true'></i></div>
                                         </div>
-                                        <input type="text" class="form-control" id="inlineFormInputGroup" name="email" placeholder="E-mail" value="<?php if(isset($_GET['email'])) echo $_GET['email'] ?>">
+                                        <input type="email" class="form-control" id="inlineFormInputGroup" name="email" placeholder="E-mail" value="<?php if(isset($_GET['email'])) echo $_GET['email'] ?>">
                                 </div>
                             </div>
 
