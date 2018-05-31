@@ -45,7 +45,6 @@
                             } 
 
                             ?>
-                        <div class=" pt-1 pb-1 pl-2 text-danger text-center" name="error"></div>
                         <form action="user_data.php" method="post">
                             <div class="col-auto pb-3">
                                 <label class="sr-only" for="inlineFormInputGroup">Your Full Name</label>

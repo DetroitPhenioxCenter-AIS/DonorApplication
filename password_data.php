@@ -8,30 +8,38 @@
 		$username = mysqli_real_escape_string($conn,$_POST['username']);
 		$hashed_pwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-		if( $pwd != $cpwd){
+		if(empty($pwd) || empty($username) || empty($cpwd)){
 
-			header("Location: createpassword.php?createpassword=wrongpasswords");
+			header("Location: createpassword.php?createpassword=empty");
 			exit();
+		}else{
 
-		}
-		else{
+				if( $pwd != $cpwd){
 
-			$sql = "SELECT user_name FROM users WHERE user_name='$username';";
-			$result = mysqli_fetch_assoc(mysqli_query($conn,$sql));
-			if($result['user_name']==$username){
-                   $sql2 = "UPDATE users SET user_password='$hashed_pwd' WHERE user_name='$username';";
-                   mysqli_query($conn, $sql2);
-				   header('Location: login.php?createpassword=success');
-				   exit();
+					header("Location: createpassword.php?createpassword=wrongpasswords");
+					exit();
 
-					
-                  
-                }else{
+				}
+				else{
 
-                	header('Location: createpassword.php?createpassword=usernotfound');
-                	exit();
-                }
+					$sql = "SELECT user_name FROM users WHERE user_name='$username';";
+					$result = mysqli_fetch_assoc(mysqli_query($conn,$sql));
+					if($result['user_name']==$username){
+		                   $sql2 = "UPDATE users SET user_password='$hashed_pwd' WHERE user_name='$username';";
+		                   mysqli_query($conn, $sql2);
+						   header('Location: login.php?createpassword=success');
+						   exit();
 
+							
+		                  
+		                }else{
+
+		                	header('Location: createpassword.php?createpassword=usernotfound');
+		                	exit();
+		                }
+
+
+				}
 
 		}
 	}

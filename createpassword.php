@@ -16,6 +16,19 @@
                                      <h2>Create Password</h2>
                                 </div>
                                 <div class="login_form pt-4 pl-5 pr-5 pb-3">
+                                  <?php
+                                    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                    if(strpos($url, "createpassword=empty") == true){
+                                        echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please fill the Fields!</div>";
+                                    } 
+                                    elseif(strpos($url, "createpassword=wrongpasswords") == true){
+                                        echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Passwords does not match!</div>";
+                                    }
+                                    elseif(strpos($url, "createpassword=usernotfound") == true){
+                                    echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter a valid username!</div>";
+                                    }                                    
+
+                                    ?>
                                     <form action="password_data.php" method="post">
                                         <div class="col-auto">
                                           <label class="sr-only" for="inlineFormInputGroup">Username</label>

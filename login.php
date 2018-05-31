@@ -16,7 +16,7 @@
                                      <h2>Donor Log In</h2>
                                 </div>
                                 <div class="login_form pt-4 pl-5 pr-5 pb-3">
-                                    <form>
+                                    <form action="user_login.php" method="post">
                                         <div class="col-auto">
                                           <label class="sr-only" for="inlineFormInputGroup">Username</label>
                                           <div class="input-group mb-2">
@@ -39,7 +39,7 @@
                                             <a href="#">Forgot Password?</a>
                                         </div>
                                         <div class="form-group text-center">
-                                            <input type="submit" name="submit" value="Login" class="btn btn-success">
+                                            <input type="submit" name="loginsubmit" value="Login" class="btn btn-success">
                                         </div>  
                                     </form>            
                                 </div>
