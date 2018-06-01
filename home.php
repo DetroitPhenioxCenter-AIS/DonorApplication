@@ -179,28 +179,28 @@ jQuery(document).ready(function(){
                 <td>Beds</td>
                 <td>200</td>
                <!-- data-toggle="modal" data-target="#myModal" -->
-                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=+beds&rh=i%3Aaps%2Ck%3A+beds"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
+                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=+beds&rh=i%3Aaps%2Ck%3A+beds" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
               
     		</tr>
     		<tr>
                 <td>Sheets</td>
                 <td>200</td>
                <!-- data-toggle="modal" data-target="#myModal" -->
-                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=bedsheets"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
+                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=bedsheets" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
               
     		</tr>
     		<tr>
                 <td>Books</td>
                 <td>200</td>
                <!-- data-toggle="modal" data-target="#myModal" -->
-                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=books&rh=i%3Aaps%2Ck%3Abooks&ajr=0"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
+                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=books&rh=i%3Aaps%2Ck%3Abooks&ajr=0" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
               
     		</tr>
     		<tr>
                 <td>Clothes</td>
                 <td>200</td>
                <!-- data-toggle="modal" data-target="#myModal" -->
-                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Dstripbooks&field-keywords=clothes"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
+                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Dstripbooks&field-keywords=clothes" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
               
     		</tr>
      

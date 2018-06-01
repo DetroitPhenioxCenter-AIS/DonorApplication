@@ -16,6 +16,17 @@
                                      <h2>Donor Log In</h2>
                                 </div>
                                 <div class="login_form pt-4 pl-5 pr-5 pb-3">
+                                  <?php
+                                      $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                      if(strpos($url, "login=error") == true){
+                                          echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Username or Email does not exist!</div>";
+                                      } 
+                                      elseif(strpos($url, "login=passworderror") == true){
+                                          echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please Check your password!</div>";
+                                      }
+                                    
+
+                                      ?>
                                     <form action="user_login.php" method="post">
                                         <div class="col-auto">
                                           <label class="sr-only" for="inlineFormInputGroup">Username</label>
