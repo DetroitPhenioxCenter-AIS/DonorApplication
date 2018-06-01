@@ -41,7 +41,9 @@
                      <a class="nav-link" href="#"><i class="fa fa-bell"></i></a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" name="logout" href="logout.php">Logout</a>
+                  	<form action="logout.php" method="post">
+                     <button class="btn btn-light" name="logout" type="submit">Logout</button>
+                 	</form>
                   </li>
                   <!--  <li class="nav-item">
                      <a class="nav-link disabled" href="#">Disabled</a>
@@ -57,13 +59,13 @@
   <div class="w-100">
   <ul class="nav nav-pills shadow"  role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="pill" href="#home"> <span class="fa fa fa-dashboard" style="color:#a8a8a8;"></span>	  Donate Money</a>
+      <a class="nav-link active" data-toggle="pill" href="#home"> <span class="fa fa fa-credit-card"></span> Donate Money</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#d1"> <span class="fa fa-cogs" style="color:#a8a8a8;"></span>Donate Items</a>
+      <a class="nav-link" data-toggle="pill" href="#d1"> <span class="fa fa-book" ></span> Donate Items</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#d2"> <span class="fa fa-cogs" style="color:#a8a8a8;"></span>Events</a>
+      <a class="nav-link" data-toggle="pill" href="#d2"> <span class="fa fa-calendar"></span> Events</a>
     </li>
   </ul>
 </div>
@@ -71,7 +73,7 @@
   //$conn = mysqli_connect('127.0.0.1','root','');
    //mysqli_select_db($conn,'USERBASE'); ?> -->
   <!-- Tab panes -->
-  <div class="container payment_box">
+  <div class="container">
   <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
           <div class="container">
@@ -87,7 +89,7 @@
 			          </div>
 			        </div>
 			        <div class="form-group">
-			          <label class="col-sm-3 control-label" for="card-number">Number</label>
+			          <label class="col-sm-3 control-label" for="card-number"> Card Number</label>
 			          <div class="col-sm-9">
 			            <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
 			          </div>
@@ -130,14 +132,14 @@
 			          </div>
 			        </div>
 			        <div class="form-group">
-			          <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
+			          <label class="col-sm-3 control-label" for="cvv">CVV</label>
 			          <div class="col-sm-9">
-			            <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
+			            <input type="password" class="form-control" maxlength="3" name="cvv" id="cvv" placeholder="Security Code">
 			          </div>
 			        </div>
 			        <br>
 			        <div class="form-group">
-			          <div class="col-sm-12">
+			          <div class="col-sm-2">
 			            <button type="button" class="btn btn-success" id="pay-now">Pay Now</button>
 			          </div>
 			        </div>
@@ -207,7 +209,39 @@ jQuery(document).ready(function(){
     </div>
     <div id="d2" class="container tab-pane fade"><br>
     <h1>Events</h1>
-                       
+        <div class="card-deck">
+  <div class="card">
+    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6Rd7_CyaP3FOvx3ijyWQflOOe7uvR74uyxcoPpa4pyAPShFmd" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Event 1</h5>
+       <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
+        <button  name="invite" class="btn btn-md btn-primary">Register</button>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEteLUUNiPUClzjkHtV3ukGrBim01r-XutDfI9YdB4v5sH99-" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Event 2</h5>
+       <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
+      <button  name="invite" class="btn btn-md btn-primary">Register</button>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA8WDPKKkGrdJlqtdSbP_ZzcP3bhaS0HR8wzSIsilsbeGDQ2rmA" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Event 3</h5>
+       <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
+       <button  name="invite" class="btn btn-md btn-primary">Register</button>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA8WDPKKkGrdJlqtdSbP_ZzcP3bhaS0HR8wzSIsilsbeGDQ2rmA" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Event 4</h5>
+      <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
+        <button  name="invite" class="btn btn-md btn-primary">Register</button>
+    </div>
+  </div></div>               
     </div>
     
   </div> 
