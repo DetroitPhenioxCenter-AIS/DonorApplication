@@ -38,6 +38,7 @@
 						$_SESSION['u_phone'] = $row['phone_number'];
 						$_SESSION['u_password'] = $row['user_password'];
 						$_SESSION['u_amount'] = $row['donation_amount'];
+						$_SESSION['u_total'] = $row['total_donation_amount'];
 						header("Location: home.php?login=loginsuccess");
 						exit();
 					}

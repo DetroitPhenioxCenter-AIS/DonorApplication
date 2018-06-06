@@ -1,6 +1,37 @@
 <?php 
 
  session_start();
+ include_once 'Includes/db.php';
+ $username = $_SESSION['u_user_name'];
+ $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+ $amount = "";
+ 
+ if(isset($_POST["pay-now"])){
+ 	
+ 	$amount = mysqli_real_escape_string($conn,$_POST['amount']);
+ 	if( empty($amount)){
+
+ 		header("Location: home.php?field=empty");
+ 		$error = 'Please Enter the field';
+ 		exit();
+ 	}else{
+
+ 		$sql1 = "UPDATE users SET donation_amount='$amount' WHERE user_name='$username';";
+ 		$sql2 = "UPDATE users SET total_donation_amount= total_donation_amount + donation_amount WHERE user_name='$username';";
+ 		$sql3 = "SELECT * FROM users WHERE user_name='$username'";
+ 		mysqli_query($conn, $sql1);
+ 		mysqli_query($conn, $sql2);
+ 		$result = mysqli_query($conn, $sql3);
+ 		if($row = mysqli_fetch_assoc($result))
+ 		{
+ 			$_SESSION['u_total'] = $row['total_donation_amount'];
+
+ 		}
+ 	
+ 	}
+
+
+}
   if(isset($_POST["pdf"]))  
  {  
       require_once('tcpdf/tcpdf.php');  
@@ -10,7 +41,7 @@
       $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));  
       $obj_pdf->SetDefaultMonospacedFont('helvetica');  
       $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
-      $obj_pdf->SetMargins(PDF_MARGIN_LEFT, '5', PDF_MARGIN_RIGHT);  
+      $obj_pdf->SetMargins(PDF_MARGIN_LEFT, '4', PDF_MARGIN_RIGHT);  
       $obj_pdf->setPrintHeader(false);  
       $obj_pdf->setPrintFooter(false);  
       $obj_pdf->SetAutoPageBreak(TRUE, 10);  
@@ -19,16 +50,51 @@
       $html = '';
       $html .= '
 
-	<div class="container w-50 h-100">
+
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <style>
+    .text-center{
+    	text-align: center;
+    }
+
+    .img-fluid{
+
+    	width: 200px;
+    	height: 41px;
+    }
+
+    .title{
+
+    	text-decoration: underline;
+    }
+
+    .text-left{
+
+    	text-align: left;
+    }
+
+    
+
+   
+    </style>
+    
+  </head>
+  <body>
+	<div >
 		<div class="text-center">
-			<div class="pt-3 pb-3">
+			<div >
 				<img src="img/logo.png" class="img-fluid">
 			</div>
-			<div class="pt-1 pb-3">
+			<div class="title">
 				<h1>Donation Report</h1>
 			</div>
 			<div >
-				<h6><?php echo "Date : " . date("m-d-Y"); ?></h6>
+				<h3 >';
+		$html .= "Date : " . date("m-d-Y"); 
+		$html .= '</h3>
 			</div>
 			<div class="text-left">
 				<h4>Hello ';
@@ -39,11 +105,11 @@
 			</div>
 
 			<div>
-				<table class="table table-striped">
+				<table border="1" cellspacing="0" cellpadding="5">
 					<tr>
 						<td>Full-Name</td>
 						<td>E-Mail</td>
-						<td>Phone Number</td>
+						<td>User-Name</td>
 						<td>Amount</td>
 					</tr>
 					<tr>
@@ -56,7 +122,7 @@
 
 				$html .= '</td><td>';
 
-				$html .=  $_SESSION['u_phone']; 
+				$html .=  $_SESSION['u_user_name']; 
 
 				$html .= '</td><td>';
 
@@ -67,10 +133,10 @@
 				</table>
 			</div>
 
-			<div class=" pt-3">
-				<h6>Thanks and Regards,</h6>
-				<h6>Detroit Pheonix Center</h6>
-				<h6>Detroit, Mi</h6>
+			<div class=" text-left">
+				<h4>Thanks and Regards,</h4>
+				<h4>Detroit Pheonix Center</h4>
+				<h4>Detroit, Mi</h4>
 				
 			</div>
 			
@@ -83,6 +149,9 @@
 
 $obj_pdf->writeHTML($html);  
 $obj_pdf->Output('donor_report.pdf', 'I');}
+
+
+
 
 ?>
 <!doctype html>
@@ -151,7 +220,7 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
 				      <a class="nav-link" data-toggle="pill" href="#d2"> <span class="fa fa-calendar"></span> Events</a>
 				    </li>
 				    <li class="nav-item">
-				    	<a class="nav-link" data-toggle="pill" href="#d3"> <span class="fa fa-calendar"></span>Donation Reports</a>
+				    	<a class="nav-link" data-toggle="pill" href="#d3"> <span class="fa fa-calendar"></span> Donation Reports</a>
 				    </li>
 				  </ul>
 				</div>
@@ -162,12 +231,12 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
   						<!-- Donate By Money Tab Starts -->
     					<div id="home" class="container tab-pane active"><br>
           					<div class="container">
-							    <form class="form-horizontal" role="form">
+							    <form class="form-horizontal" role="form" method="post">
 							      <fieldset>
 							        <legend>
 							          <h1 class="form-top">Donate By Payment</h1>
 							        </legend>
-							        <div class="form-group">
+							        <!--<div class="form-group">
 							          <label class="col-sm-3 control-label" for="card-holder-name">Name</label>
 							          <div class="col-sm-9">
 							            <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
@@ -221,11 +290,26 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
 							          <div class="col-sm-9">
 							            <input type="password" class="form-control" maxlength="3" name="cvv" id="cvv" placeholder="Security Code">
 							          </div>
-							        </div>
-							        <br>
+							        </div>-->
+							        <div class="form-group">
+							        	<?php 
+							        		
+                            				if(strpos($url, "field=empty") == true){
+
+                                			echo "<div class='pt-1 pb-1 pl-2 text-danger text-left'>Please fill the required Field!</div>";
+                           					 } 
+
+							        	 ?>
+							          <label class="col-sm-3 control-label" for="amount">Amount</label>
+							          <div class="col-sm-9">
+							            <input type="number" class="form-control"  name="amount" id="amount"  placeholder="Amount">
+							          </div>
+							        </div>			
 							        <div class="form-group">
 							          <div class="col-sm-2">
-							            <button type="button" class="btn btn-success" id="pay-now">Pay Now</button>
+							        
+							            <button type="submit" class="btn btn-success" id="pay-now" name="pay-now">Pay Now</button>
+
 							          </div>
 							        </div>
 							      </fieldset>
@@ -334,9 +418,29 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
     					<!-- Donation Reports Tab Starts -->
      					<div id="d3" class="container tab-pane fade"><br>
     						<h2>Donation Reports</h2>
-    						<form method="post">
-    						<button class="btn btn-primary" type="submit" name="pdf">PDF</button>
-    						</form>
+    						<table class="table table-striped">
+    							<tr>
+    								<td>id</td>
+    								<td>Year</td>
+    								<td>Donation method</td>
+    								<td>Donated</td>
+    								<td>Report</td>
+    							</tr>
+    							
+    							<tr>
+    								<td>1</td>
+    								<td> <?php  echo date("Y"); ?></td>
+    								<td>Donate By Money</td>
+    								<td><?php echo ($_SESSION['u_total']); ?></td>
+    								<td><form method='post'>
+    									<button class='btn btn-primary' type='submit' name='pdf'>PDF</button>
+    									</form>
+    								</td>
+    							</tr>
+
+    							
+    						</table>
+    						
     						
     					</div>
     					<!-- Donation Reports Tab Starts -->
