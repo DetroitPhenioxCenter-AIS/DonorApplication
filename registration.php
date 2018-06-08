@@ -1,6 +1,7 @@
 <?php
 
         include_once 'website_head.php';
+        include_once 'user_data.php';
  ?>
 
  <title>Donor Registration</title>
@@ -52,7 +53,7 @@
                                         <div class="input-group-prepend">
                                               <div class="input-group-text"><i class='fa fa-user' aria-hidden='true'></i></div>
                                         </div>
-                                        <input type="text" class="form-control" id="inlineFormInputGroup" name="full-name" placeholder="Your Full Name" value="<?php if(isset($_GET['full-name'])) echo $_GET['full-name'] ?>" >
+                                        <input type="text" class="form-control" id="inlineFormInputGroup" name="full-name" placeholder="Your Full Name" value="<?php if(isset($_GET['full-name'])) echo $_GET['full-name']; ?>" >
                                 </div>
                             </div>
                             <div class="col-auto pb-3">

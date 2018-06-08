@@ -22,10 +22,10 @@
 				}
 				else{
 
-					$sql = "SELECT user_name FROM users WHERE user_name='$username';";
+					$sql = "SELECT user_name FROM donors WHERE user_name='$username';";
 					$result = mysqli_fetch_assoc(mysqli_query($conn,$sql));
 					if($result['user_name']==$username){
-		                   $sql2 = "UPDATE users SET user_password='$hashed_pwd' WHERE user_name='$username';";
+		                   $sql2 = "UPDATE donors SET user_password='$hashed_pwd' WHERE user_name='$username';";
 		                   mysqli_query($conn, $sql2);
 						   header('Location: login.php?createpassword=success');
 						   exit();

@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
 	// Check for Empty Inputs 
 	if(empty($fullname) || empty($username) ||  empty($email)){
 		
-		header("Location: registration.php?registration=empty");
+		header("Location: registration.php?registration=empty&full-name=$fullname&user-name=$username&phone=$number&email=$email");
 		exit();
 	} else {
 				// Check whether the input chars are valid
@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
 							exit();
 						} else{
 
-								$sql = "SELECT * FROM users WHERE (user_name='$username' OR email='$email');";
+								$sql = "SELECT * FROM donors WHERE (user_name='$username' OR email='$email');";
 								$result = mysqli_query($conn, $sql);
 								$resultCheck = mysqli_num_rows($result);
 								if($resultCheck > 0) {
@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
 
 								} else{
 
-										$sql = "INSERT INTO users (full_name,user_name,phone_number,email) VALUES (?,?,?,?);";
+										$sql = "INSERT INTO donors (full_name,user_name,phone_number,email) VALUES (?,?,?,?);";
 										$dbcon = mysqli_stmt_init($conn);
 										if(!mysqli_stmt_prepare($dbcon,$sql)){
 											echo "SQL error";
@@ -52,7 +52,7 @@ if(isset($_POST['submit'])){
 											mysqli_stmt_bind_param($dbcon,"ssss",$fullname,$username,$number,$email);
 											mysqli_stmt_execute($dbcon);
 										}
-										user_mail();
+										donor_mail();
 										header("Location: thanks_registration.php?registration=success");
 		    							exit();
 

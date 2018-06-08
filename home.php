@@ -47,6 +47,8 @@
       $obj_pdf->SetAutoPageBreak(TRUE, 10);  
       $obj_pdf->SetFont('helvetica', '', 12);  
       $obj_pdf->AddPage(); 
+      $sql = "SELECT * FROM users WHERE user_name='$username'";
+      $result = mysqli_query($conn, $sql);
       $html = '';
       $html .= '
 
@@ -107,30 +109,20 @@
 			<div>
 				<table border="1" cellspacing="0" cellpadding="5">
 					<tr>
-						<td>Full-Name</td>
-						<td>E-Mail</td>
-						<td>User-Name</td>
+						<td>Date</td>
 						<td>Amount</td>
-					</tr>
-					<tr>
-						<td>';
-				$html .=  $_SESSION['u_full_name']; 
+						
+					</tr>';
 
-				$html .= '</td><td>';
+		 while($row = mysqli_fetch_assoc($result)){
+					
+				$html .= '<tr>
+						<td>' . date("m-d-Y") . '</td><td>' .
+
+						$row['donation_amount'] . '</td></tr>';}
+
 				
-				$html .= $_SESSION['u_email']; 
-
-				$html .= '</td><td>';
-
-				$html .=  $_SESSION['u_user_name']; 
-
-				$html .= '</td><td>';
-
-				$html .= $_SESSION['u_amount']; 
-
-				$html .='</td>
-					</tr>
-				</table>
+		$html .= '</table>
 			</div>
 
 			<div class=" text-left">

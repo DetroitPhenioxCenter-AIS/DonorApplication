@@ -3,6 +3,6 @@
 $dbServer = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
-$dbName = "donation";
+$dbName = "detroitphenoixcenter";
 
 $conn = mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);

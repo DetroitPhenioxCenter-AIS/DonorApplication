@@ -16,7 +16,7 @@
 			exit();
 		} else{
 
-			$sql = "SELECT * FROM users WHERE user_name='$username' OR email='$username';";
+			$sql = "SELECT * FROM donors WHERE user_name='$username' OR email='$username';";
 			$result = mysqli_query($conn, $sql);
 			$check = mysqli_num_rows($result);
 			if($check < 1){
