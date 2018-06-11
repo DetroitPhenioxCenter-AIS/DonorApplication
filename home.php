@@ -9,6 +9,7 @@
  if(isset($_POST["pay-now"])){
  	
  	$amount = mysqli_real_escape_string($conn,$_POST['amount']);
+ 	$date = date("m-d-Y");
  	if( empty($amount)){
 
  		header("Location: home.php?field=empty");
@@ -16,131 +17,24 @@
  		exit();
  	}else{
 
- 		$sql1 = "UPDATE users SET donation_amount='$amount' WHERE user_name='$username';";
- 		$sql2 = "UPDATE users SET total_donation_amount= total_donation_amount + donation_amount WHERE user_name='$username';";
- 		$sql3 = "SELECT * FROM users WHERE user_name='$username'";
+ 		$sql1 = "UPDATE donors SET donation_amount=CONCAT(donation_amount,'$amount|'),date_donation=CONCAT(date_donation, '$date|') WHERE user_name='$username';";
  		mysqli_query($conn, $sql1);
- 		mysqli_query($conn, $sql2);
- 		$result = mysqli_query($conn, $sql3);
- 		if($row = mysqli_fetch_assoc($result))
- 		{
- 			$_SESSION['u_total'] = $row['total_donation_amount'];
-
+ 		$sql2 = "SELECT * FROM donors WHERE user_name='$username';";
+ 		$result = mysqli_query($conn, $sql2);
+ 		while($row = mysqli_fetch_assoc($result)){
+ 			$array = explode('|',$row['donation_amount']);
+ 			$total_amount = array_sum($array);
+ 		$sql3 = "UPDATE donors SET total_donation_amount='$total_amount' WHERE user_name='$username';";
+ 		mysqli_query($conn, $sql3);
+ 		$_SESSION['u_total'] = $total_amount;
  		}
- 	
+
+ 		
  	}
 
 
 }
-  if(isset($_POST["pdf"]))  
- {  
-      require_once('tcpdf/tcpdf.php');  
-      $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
-      $obj_pdf->SetCreator(PDF_CREATOR);   
-      $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));  
-      $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));  
-      $obj_pdf->SetDefaultMonospacedFont('helvetica');  
-      $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
-      $obj_pdf->SetMargins(PDF_MARGIN_LEFT, '4', PDF_MARGIN_RIGHT);  
-      $obj_pdf->setPrintHeader(false);  
-      $obj_pdf->setPrintFooter(false);  
-      $obj_pdf->SetAutoPageBreak(TRUE, 10);  
-      $obj_pdf->SetFont('helvetica', '', 12);  
-      $obj_pdf->AddPage(); 
-      $sql = "SELECT * FROM users WHERE user_name='$username'";
-      $result = mysqli_query($conn, $sql);
-      $html = '';
-      $html .= '
 
-
-<!doctype html>
-<html lang="en">
-  <head>
-    
-    <style>
-    .text-center{
-    	text-align: center;
-    }
-
-    .img-fluid{
-
-    	width: 200px;
-    	height: 41px;
-    }
-
-    .title{
-
-    	text-decoration: underline;
-    }
-
-    .text-left{
-
-    	text-align: left;
-    }
-
-    
-
-   
-    </style>
-    
-  </head>
-  <body>
-	<div >
-		<div class="text-center">
-			<div >
-				<img src="img/logo.png" class="img-fluid">
-			</div>
-			<div class="title">
-				<h1>Donation Report</h1>
-			</div>
-			<div >
-				<h3 >';
-		$html .= "Date : " . date("m-d-Y"); 
-		$html .= '</h3>
-			</div>
-			<div class="text-left">
-				<h4>Hello ';
-		$html .= $_SESSION['u_user_name'];
-
-		$html .= ',</h4>
-				<p>Thanks a lot for donating and supporting us. Please find your details below for tax filing:</p>
-			</div>
-
-			<div>
-				<table border="1" cellspacing="0" cellpadding="5">
-					<tr>
-						<td>Date</td>
-						<td>Amount</td>
-						
-					</tr>';
-
-		 while($row = mysqli_fetch_assoc($result)){
-					
-				$html .= '<tr>
-						<td>' . date("m-d-Y") . '</td><td>' .
-
-						$row['donation_amount'] . '</td></tr>';}
-
-				
-		$html .= '</table>
-			</div>
-
-			<div class=" text-left">
-				<h4>Thanks and Regards,</h4>
-				<h4>Detroit Pheonix Center</h4>
-				<h4>Detroit, Mi</h4>
-				
-			</div>
-			
-		</div>
-		
-	</div>
-
-</body>
-</html>';
-
-$obj_pdf->writeHTML($html);  
-$obj_pdf->Output('donor_report.pdf', 'I');}
 
 
 
@@ -223,10 +117,9 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
   						<!-- Donate By Money Tab Starts -->
     					<div id="home" class="container tab-pane active"><br>
           					<div class="container">
-							    <form class="form-horizontal" role="form" method="post">
+							    <form class="form-horizontal" role="form" method="post" >
 							      <fieldset>
 							        <legend>
-							          <h1 class="form-top">Donate By Payment</h1>
 							        </legend>
 							        <!--<div class="form-group">
 							          <label class="col-sm-3 control-label" for="card-holder-name">Name</label>
@@ -292,7 +185,7 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
                            					 } 
 
 							        	 ?>
-							          <label class="col-sm-3 control-label" for="amount">Amount</label>
+							          <label class="col-sm-3 control-label" for="amount" >Amount</label>
 							          <div class="col-sm-9">
 							            <input type="number" class="form-control"  name="amount" id="amount"  placeholder="Amount">
 							          </div>
@@ -300,7 +193,7 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
 							        <div class="form-group">
 							          <div class="col-sm-2">
 							        
-							            <button type="submit" class="btn btn-success" id="pay-now" name="pay-now">Pay Now</button>
+							            <button type="submit" class="btn btn-success" id="pay-now" name="pay-now" >Pay Now</button>
 
 							          </div>
 							        </div>
@@ -424,9 +317,9 @@ $obj_pdf->Output('donor_report.pdf', 'I');}
     								<td> <?php  echo date("Y"); ?></td>
     								<td>Donate By Money</td>
     								<td><?php echo ($_SESSION['u_total']); ?></td>
-    								<td><form method='post'>
-    									<button class='btn btn-primary' type='submit' name='pdf'>PDF</button>
-    									</form>
+    								<td>
+    									<a class='btn btn-primary'  name='pdf' href="donation_report.php">PDF</a>
+    									
     								</td>
     							</tr>
 
