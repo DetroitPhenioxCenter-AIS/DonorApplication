@@ -83,8 +83,18 @@
 		        <div style="width:500px;background-color:#f5f5f5;border: 1px solid #a8a8a8; padding:20px; border-radius:2px;">
 
 		            <img src="https://scontent-ort2-2.cdninstagram.com/vp/dab330c3a04b24bb987abed742147509/5B8ABB80/t51.2885-19/s150x150/26873078_409153092875319_57809469530177536_n.jpg" height="100" width="100" style="border-radius:100%;">
-		            <h2 style="color:#e60000;">'. $_POST['event-name'].'</h2>
-		            <h3>Hello!&nbsp;'.$_POST['first-name'].'</h3>
+		            ';
+
+		           
+						$event_array = explode(",", $event_name);
+						$count = count($event_array);
+						for($i=0;$i<$count;$i++){
+
+							$mail->Body .= '<h2 style="color:#e60000;">'.$event_array[$i].'&nbsp;</h2>';
+						}
+					
+		            
+		            $mail->Body .='<h3>Hello!&nbsp;'.$_POST['first-name'].'</h3>
 		            <h3>THANK YOU!</h3> for joining as a volunteer and helping us in the event.
 		            
 		            

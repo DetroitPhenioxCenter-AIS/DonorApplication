@@ -60,6 +60,15 @@ input::-webkit-inner-spin-button {
 
 /* Donor Login End*/
 
+/* Volunteer SignUp */
+ 
+.event-box{
+
+  background-color: white !important;
+  border-radius: 5px !important;
+  color: #6c757d !important;
+}
+
 
 
 

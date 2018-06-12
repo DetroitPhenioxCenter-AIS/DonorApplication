@@ -8,16 +8,16 @@ include_once 'website_head.php';
 <title>Volunteer Registration</title>
     <div class="container">
             <div class="background img-fluid"></div>
-            <div class="head_image text-center pt-3 pb-1">
+            <div class="head_image text-center pt-2 pb-1">
               <img src="img/logo.png" class="img-fluid">
             </div>
-            <div class="row justify-content-md-center mt-2">
+            <div class="row justify-content-md-center mt-1">
                   <div class="col-lg-7 col-md-10 col-sm-12">
                           <div class="login_box">
                                 <div class="login_title text-center text-dark pt-2 pb-2 ml-4 mr-4 border-bottom border-dark">
                                      <h2>Volunteer Sign Up</h2>
                                 </div>
-                                <div class="login_form pt-4 pl-5 pr-5 pb-3">
+                                <div class="login_form pt-3 pl-5 pr-5 pb-2">
                                   <?php
                                       $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                                       if(strpos($url, "signup=empty") == true){
@@ -87,15 +87,56 @@ include_once 'website_head.php';
                                           </div>
                                         </div>
                                         <div class="col-auto">
-                                          <div class="input-group mb-3">
-                                            <select  class="form-control" name="event-name">
+                                          <div class="input-group mb-1 event-box pt-2 pb-1 pl-2 pr-1">
+                                            <label class="border-bottom border-dark text-center">Which Events Would You Like to volunteer?</label>
+                                            <div class="row">
+                                              <div class="col-4"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" name="event[]" type="checkbox"  value="All Events">
+                                                <span style="font-size: 15px;">All Events</span>
+                                              </label>
+                                              </div></div>
+                                              <div class="col-4">
+                                                <div class="form-check">
+                                                  <label class="form-check-label">
+                                                    <input class="form-check-input" name="event[]" type="checkbox"  value="Wine Tasting Event">
+                                                    <span style="font-size: 15px;">Wine Tasting </span> 
+                                                  </label>
+                                                </div>
+                                              </div>
+                                              <div class="col-4"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="event[]"  value="Shopping Event">
+                                                <span style="font-size: 15px;">Shopping </span>                          
+                                              </label>
+                                              </div></div>
+                                              <div class="col-4"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="event[]" value="Basketball Charity Event">
+                                                <span style="font-size: 15px;">Basketball Charity </span>
+                                              </label>
+                                              </div></div>
+                                              
+                                              <div class="col-4"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="event[]"  value="As Needed">
+                                               <span style="font-size: 15px;">As Needed</span>
+                                              </label>
+                                              </div></div>
+                                              
+                                              
+                                              
+                                              
+                                            
+                                          </div>
+                                            <!--<select  class="form-control" name="event-name">
 										      <option value="">Which Event Would You Like to Volunteer </option>
 										      <option value="Wine Tasting Event">Wine Tasting Event</option>
 										      <option value="Shopping Event">Shopping Event</option>
 										      <option value="Basketball Charity Event">Basketball Charity Event</option>
 										      <option value="All Events">All Events</option>
 										      <option value="As Needed">As Needed</option>
-										    </select>
+										    </select>-->
                                           </div>
                                         </div>
 

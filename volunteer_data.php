@@ -7,13 +7,13 @@
 if(isset($_POST['volunteer-submit'])){
 	$first_name = mysqli_real_escape_string($conn,$_POST['first-name']);
 	$last_name = mysqli_real_escape_string($conn,$_POST['last-name']);
-	$event_name = mysqli_real_escape_string($conn,$_POST['event-name']);
+	$event_name = implode(',', $_POST['event']);
 	$number = mysqli_real_escape_string($conn,$_POST['phone']);
 	$email = mysqli_real_escape_string($conn,$_POST['email']);
 	$volunteer_type = mysqli_real_escape_string($conn,$_POST['reason']);
 	$address = mysqli_real_escape_string($conn,$_POST['address']);
 	// Check for Empty Inputs 
-	if(empty($first_name) || empty($email) ||  empty($volunteer_type) || empty($event_name)) {
+	if(empty($first_name) || empty($email) ||  empty($volunteer_type) ) {
 		
 		header("Location: volunteer.php?signup=empty&first-name=$first_name&last-name=$last_name&phone=$number&email=$email&event-name=$event_name&reason=$volunteer_type&address=$address");
 		exit();
