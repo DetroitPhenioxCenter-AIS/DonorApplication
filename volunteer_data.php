@@ -53,13 +53,14 @@ if(isset($_POST['volunteer-submit'])){
 											mysqli_stmt_bind_param($dbcon,"sssssss",$first_name,$last_name,$number,$email,$event_name,$volunteer_type,$address);
 											mysqli_stmt_execute($dbcon);
 										}
+							
 										volunteer_mail();
 										header("Location: thanks_registration.php?registration=success");
 		    							exit();
+
 								} 
 
 								
-							
 
 						}
 				}

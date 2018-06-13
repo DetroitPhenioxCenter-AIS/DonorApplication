@@ -106,7 +106,10 @@
 				      <a class="nav-link" data-toggle="pill" href="#d2"> <span class="fa fa-calendar"></span> Events</a>
 				    </li>
 				    <li class="nav-item">
-				    	<a class="nav-link" data-toggle="pill" href="#d3"> <span class="fa fa-calendar"></span> Donation Reports</a>
+				    	<a class="nav-link" data-toggle="pill" href="#d3"> <span class="fa fa-bar-chart"></span> Donation Reports</a>
+				    </li>
+				    <li class="nav-item">
+				    	<a class="nav-link" data-toggle="pill" href="#d4"> <span class="fa fa-money"></span> FundRaisers</a>
 				    </li>
 				  </ul>
 				</div>
@@ -228,34 +231,18 @@
 								      </tr>
 								    </thead>
 						    		<tbody id="myTable">
-								            <tr>
-								                <td>Beds</td>
-								                <td>200</td>
-								              
-								                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=+beds&rh=i%3Aaps%2Ck%3A+beds" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
-								              
-								    		</tr>
-								    		<tr>
-								                <td>Sheets</td>
-								                <td>200</td>
-								               <!-- data-toggle="modal" data-target="#myModal" -->
-								                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=bedsheets" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
-								              
-								    		</tr>
-								    		<tr>
-								                <td>Books</td>
-								                <td>200</td>
-								               <!-- data-toggle="modal" data-target="#myModal" -->
-								                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=books&rh=i%3Aaps%2Ck%3Abooks&ajr=0" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
-								              
-								    		</tr>
-								    		<tr>
-								                <td>Clothes</td>
-								                <td>200</td>
-								               <!-- data-toggle="modal" data-target="#myModal" -->
-								                <td><a href="https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Dstripbooks&field-keywords=clothes" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td>
-								              
-								    		</tr>
+						    			<?php
+
+						    				$sql = "SELECT * FROM inventory;";
+						    				$result = mysqli_query($conn,$sql);
+						    				while($row = mysqli_fetch_assoc($result)){
+
+						    					echo '<tr><td>'. $row['inventory_name'] . '</td><td>'. $row['inventory_quantity'].
+						    					'</td><td><a href="'.$row['url'].'" target="_blank"><button type="button" class="btn btn-sm btn-primary">Buy</button></a></td></tr>';
+						    				}
+
+						    			    ?>
+								            
 						     
 						    		</tbody>
 						  		</table>                
@@ -265,38 +252,24 @@
     					<div id="d2" class="container tab-pane fade"><br>
     						<h1>Events</h1>
         					<div class="card-deck">
-							  <div class="card">
-							    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6Rd7_CyaP3FOvx3ijyWQflOOe7uvR74uyxcoPpa4pyAPShFmd" alt="Card image cap">
-							    <div class="card-body">
-							      <h5 class="card-title">Event 1</h5>
-							       <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
+
+        						<?php
+        								$sql = "SELECT * FROM events;";
+						    			$result = mysqli_query($conn,$sql);
+						    			while($row = mysqli_fetch_assoc($result)){
+
+						    				echo '<div class="card">
+							    					<img class="card-img-top" >
+							    <div class="card-body text-center">
+							      <h5 class="card-title">'.$row['event_name'].'</h5>
+							       <p class="card-text"><small>'. $row['event_date'].'<br>Venue :'.$row['event_venue'].'<br>Description :'.$row['event_description'].'</small></p>
 							        <button  name="invite" class="btn btn-md btn-primary">Register</button>
 							    </div>
-							  </div>
-							  <div class="card">
-							    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEteLUUNiPUClzjkHtV3ukGrBim01r-XutDfI9YdB4v5sH99-" alt="Card image cap">
-							    <div class="card-body">
-							      <h5 class="card-title">Event 2</h5>
-							       <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
-							      <button  name="invite" class="btn btn-md btn-primary">Register</button>
-							    </div>
-							  </div>
-							  <div class="card">
-							    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA8WDPKKkGrdJlqtdSbP_ZzcP3bhaS0HR8wzSIsilsbeGDQ2rmA" alt="Card image cap">
-							    <div class="card-body">
-							      <h5 class="card-title">Event 3</h5>
-							       <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
-							       <button  name="invite" class="btn btn-md btn-primary">Register</button>
-							    </div>
-							  </div>
-							  <div class="card">
-							    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA8WDPKKkGrdJlqtdSbP_ZzcP3bhaS0HR8wzSIsilsbeGDQ2rmA" alt="Card image cap">
-							    <div class="card-body">
-							      <h5 class="card-title">Event 4</h5>
-							      <p class="card-text"><small> Date : 06-01-2018<br>Venue : DPC<br>Description : This is a wider card with supporting text below as a natural lead-in to additional content.</small></p>
-							        <button  name="invite" class="btn btn-md btn-primary">Register</button>
-							    </div>
-							  </div>
+							  </div>';
+						    			}
+
+        						 ?>
+							  
 							</div>               
     					</div>
     					<!-- Events Tab Ends -->
@@ -316,7 +289,7 @@
     								<td>1</td>
     								<td> <?php  echo date("Y"); ?></td>
     								<td>Donate By Money</td>
-    								<td><?php echo ($_SESSION['u_total']); ?></td>
+    								<td><?php echo '$'. ($_SESSION['u_total']); ?></td>
     								<td>
     									<a class='btn btn-primary'  name='pdf' href="donation_report.php">PDF</a>
     									
@@ -328,7 +301,66 @@
     						
     						
     					</div>
-    					<!-- Donation Reports Tab Starts -->
+    					<!-- Donation Reports Tab Ends -->
+    					<div id="d4" class="container tab-pane fade">
+    						<h2 class="pt-4">Fund Raisers</h2>
+    						<div class="card-deck">
+    							<?php 
+
+    								$sql = "SELECT * FROM fundraiser;";
+						    		$result = mysqli_query($conn,$sql);
+						    		while($row = mysqli_fetch_assoc($result)){
+
+						    			echo '<div class="card">
+						    					<img class="card-img-top" >
+							    				<div class="card-body text-center">
+							    					<h5 class="card-title">'.$row['fund_name'].'</h5>
+							    					<div class="card-text">
+							    						<p>'.$row['fund_description'].'</p>
+							    						<h6>Amount:'.$row['actual_amount'].'</h6>
+							    						<div class="progress">
+														  <div class="progress-bar" role="progressbar" style="width:'.$row['amount_received'].'%;"aria-valuenow="900" aria-valuemin="0" aria-valuemax="1000">
+														  </div>
+														</div>
+														  <div>
+														  <button type="button " class="btn btn-md btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Donate </button>
+														
+														  </div>
+														
+														
+							    					 </div>
+							    					 
+							    				</div>
+							    				
+						    			 	 </div>';
+						    		}
+
+
+    							 ?>
+						    		
+    						</div>
+    						<!-- Modal -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								        ...
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <button type="button" class="btn btn-primary">Save changes</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+    					</div>
+
   					</div> 
  		 		</div>
  		 		<!-- Tab Panes Ends -->

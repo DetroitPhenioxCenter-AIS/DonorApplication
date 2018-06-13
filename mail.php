@@ -3,6 +3,7 @@
 	include 'PHPMailerAutoload.php';
 	include 'credential.php';
 	include 'user_data.php';
+	include_once 'Includes/db.php';
 
 	
 
@@ -85,13 +86,18 @@
 		            <img src="https://scontent-ort2-2.cdninstagram.com/vp/dab330c3a04b24bb987abed742147509/5B8ABB80/t51.2885-19/s150x150/26873078_409153092875319_57809469530177536_n.jpg" height="100" width="100" style="border-radius:100%;">
 		            ';
 
-		           
-						$event_array = explode(",", $event_name);
-						$count = count($event_array);
-						for($i=0;$i<$count;$i++){
+						/*$sql = "SELECT * FROM volunteers WHERE email='$email';";
+		            	$result = mysqli_query($conn, $sql);
+						While($row = mysqli_fetch_assoc($result))
+							{
+								$event_array = explode(",", $row['event_name']);
+								$count = count($event_array);
+								for($i=0;$i<$count;$i++){
 
-							$mail->Body .= '<h2 style="color:#e60000;">'.$event_array[$i].'&nbsp;</h2>';
-						}
+								$mail->Body .= '<h4>'. $event_array[$i] . '&nbsp;</h4>';
+							}
+						}*/
+		          
 					
 		            
 		            $mail->Body .='<h3>Hello!&nbsp;'.$_POST['first-name'].'</h3>
@@ -102,9 +108,9 @@
 		            <div style="padding:20px;background-color: #2c3840;">
 		                    <a  href="http://www.detroitphoenixcenter.org/index.html" style="color:white;">OurWebsite</a>&nbsp;&nbsp;&nbsp;<a  href="https://www.instagram.com/detroitphoenixcenter/" style="color:white;">Intsagram</a>&nbsp;&nbsp;&nbsp;<a  href="https://www.linkedin.com/company/detroit-phoenix-center" style="color:white;">Linkedin</a>
 		            </div>
-
+		            </div>
 		        </center>
-		        </div>
+		        
 
 		        </body> 
 		        </html> ';

@@ -40,11 +40,11 @@ include_once 'website_head.php';
 			$array1 = explode('|',$row['date_donation']);
 			$len=count($array);
 			for ($i=0;$i<$len-1;$i++){
-		echo '<tr><td>'.$array1[$i].'</td><td>'. $array[$i]. '</td></tr>';
+		echo '<tr><td>'.$array1[$i].'</td><td>$'. $array[$i]. '</td></tr>';
 		}} ?>
 			</table>
 			<div >
-				<h4> Total Amount: <?php echo($_SESSION['u_total']); ?> </h4>;
+				<h4> Total Amount: <?php echo'$'.($_SESSION['u_total']); ?> </h4>;
 			</div>
 			<div class=" text-left">
 				<h4>Thanks and Regards,</h4>
