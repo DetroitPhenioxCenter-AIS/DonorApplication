@@ -92,7 +92,7 @@
 		  </nav>
 		  <!-- Title Bar Ends -->
 		  
-         <div class="row">
+         
          	<!-- Navbar Tabs Starts -->
 			  	<div class="w-100">
 				  <ul class="nav nav-pills shadow"  role="tablist">
@@ -252,24 +252,24 @@
     					<div id="d2" class="container tab-pane fade"><br>
     						<h1>Events</h1>
         					<div class="card-deck">
-
+        						<div class="row">
         						<?php
         								$sql = "SELECT * FROM events;";
 						    			$result = mysqli_query($conn,$sql);
 						    			while($row = mysqli_fetch_assoc($result)){
 
-						    				echo '<div class="card">
-							    					<img class="card-img-top" >
+						    				echo '<div class="col-md-3 col-sm-6 mb-3"><div class="card">
+							    					<img class="card-img-top" src="img/events.jpg" he>
 							    <div class="card-body text-center">
 							      <h5 class="card-title">'.$row['event_name'].'</h5>
-							       <p class="card-text"><small>'. $row['event_date'].'<br>Venue :'.$row['event_venue'].'<br>Description :'.$row['event_description'].'</small></p>
-							        <button  name="invite" class="btn btn-md btn-primary">Register</button>
+							       <h6 class="card-text">'. $row['event_date'].'</h6><h6>Venue :'.$row['event_venue'].'</h6><small><p class="text-left">Description :'.$row['event_description'].'</p></small>
+							        <a href="https://www.eventbrite.com/e/a-wine-tasting-to-benefit-detroit-phoenix-center-tickets-33245771999" name="invite" class="btn btn-md btn-primary">Register</a>
 							    </div>
-							  </div>';
+							  </div></div>';
 						    			}
 
         						 ?>
-							  
+							  </div>
 							</div>               
     					</div>
     					<!-- Events Tab Ends -->
@@ -305,25 +305,28 @@
     					<div id="d4" class="container tab-pane fade">
     						<h2 class="pt-4">Fund Raisers</h2>
     						<div class="card-deck">
+    							<div class="row">
     							<?php 
 
     								$sql = "SELECT * FROM fundraiser;";
 						    		$result = mysqli_query($conn,$sql);
 						    		while($row = mysqli_fetch_assoc($result)){
-
-						    			echo '<div class="card">
-						    					<img class="card-img-top" >
-							    				<div class="card-body text-center">
-							    					<h5 class="card-title">'.$row['fund_name'].'</h5>
+						    			$amount_received = ($row['amount_received']/$row['actual_amount'])*100;
+						    			echo '<div class="col-md-4 col-sm-6"><div class="card" style="height: 450px; overflow:hidden;">
+						    					<img class="card-img-top" src="img/fundraising.jpg" >
+							    				<div class="card-body ">
+							    					<h5 class="card-title text-center">'.$row['fund_name'].'</h5>
 							    					<div class="card-text">
-							    						<p>'.$row['fund_description'].'</p>
-							    						<h6>Amount:'.$row['actual_amount'].'</h6>
+							    						<p><small> Description: '.$row['fund_description'].'</small></p>
+							    						<h6 class="text-center pb-2"> Total Amount: $'.$row['actual_amount'].'</h6>
 							    						<div class="progress">
-														  <div class="progress-bar" role="progressbar" style="width:'.$row['amount_received'].'%;"aria-valuenow="900" aria-valuemin="0" aria-valuemax="1000">
+							    						  
+														  <div class="progress-bar" role="progressbar" style="width:'.$amount_received.'%;"aria-valuenow="900" aria-valuemin="0" aria-valuemax="1000">
 														  </div>
 														</div>
-														  <div>
-														  <button type="button " class="btn btn-md btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Donate </button>
+														<h6 class="text-center pt-1">Amount Received: $'.$row['amount_received'].'/ $'.$row['actual_amount'].'</h6>
+														  <div class="mt-4 text-center">
+														  <button type="button" class="btn btn-md btn-primary fundid" data-toggle="modal" data-target="#exampleModalCenter" data-id="'.$row['fund_id'].'"> Donate </button>
 														
 														  </div>
 														
@@ -332,43 +335,62 @@
 							    					 
 							    				</div>
 							    				
-						    			 	 </div>';
+						    			 	 </div></div>';
 						    		}
 
 
     							 ?>
+    							</div>
 						    		
     						</div>
-    						<!-- Modal -->
-								<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-								  <div class="modal-dialog modal-dialog-centered" role="document">
-								    <div class="modal-content">
-								      <div class="modal-header">
-								        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								          <span aria-hidden="true">&times;</span>
-								        </button>
-								      </div>
-								      <div class="modal-body">
-								        ...
-								      </div>
-								      <div class="modal-footer">
-								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								        <button type="button" class="btn btn-primary">Save changes</button>
-								      </div>
-								    </div>
-								  </div>
-								</div>
+    						<div class="modal fade" id="exampleModalCenter" role="dialog">
+    							<div class="modal-dialog modal-dialog-centered">    
+      								<!-- Modal content-->
+      								<div class="modal-content">
+      									<?php
+                                      $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                      if(strpos($url, "donation=failed") == true){
+                                          echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter the amount!</div>";
+                                      } 
+                                      
+                                    
+
+                                      ?>
+        							<form method="POST" action='fund_data.php'>
+        								<div class="modal-body">            
+                							<div class="form-group">
+                    							<label for="formGroupExampleInput">Enter Amount</label>
+                        						<input type="number" name="amount" class="form-control" id="formGroupExampleInput" placeholder="Enter Amount">
+                							</div>    
+                							<input type="hidden" name="fundid" id="fundid">                      
+        								</div>
+        								<div class="modal-footer">
+          									<button type="submit" class="form-control btn btn-primary btn-small" id="formGroupExampleInput" name="fundraiser">Submit</button>
+        								</div>
+    								</form>
+        							</div>
+      							</div>      
+    						</div>
+    						
     					</div>
 
   					</div> 
  		 		</div>
  		 		<!-- Tab Panes Ends -->
-		</div>
+		
    </div>
 
 
       <!-- Optional JavaScript -->
+      <script type="text/javascript">
+    	$('.fundid').on('click', function (e) {
+       		$('#fundid').val($(this).attr("data-id"));       
+    	});
+    	$('#exampleModalCenter').on('hidden.bs.modal', function () {
+        $('#fundid').val('');
+    		});
+
+     </script>
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
      
    </body>
