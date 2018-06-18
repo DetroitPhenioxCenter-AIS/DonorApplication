@@ -95,114 +95,122 @@
          
          	<!-- Navbar Tabs Starts -->
 			  	<div class="w-100">
-				  <ul class="nav nav-pills shadow"  role="tablist">
+				  <ul class="nav nav-pills shadow menu"  role="tablist">
 				    <li class="nav-item">
-				      <a class="nav-link active" data-toggle="pill" href="#home"> <span class="fa fa fa-credit-card"></span> Donate Money</a>
+				      <a class="nav-link active menu-item" data-toggle="pill" href="#home"> <span class="fa fa fa-credit-card"></span> Donate Money</a>
 				    </li>
 				    <li class="nav-item">
-				      <a class="nav-link" data-toggle="pill" href="#d1"> <span class="fa fa-book" ></span> Donate Items</a>
+				      <a class="nav-link menu-item" data-toggle="pill" href="#d1"> <span class="fa fa-book" ></span> Donate Items</a>
 				    </li>
 				    <li class="nav-item">
-				      <a class="nav-link" data-toggle="pill" href="#d2"> <span class="fa fa-calendar"></span> Events</a>
+				      <a class="nav-link menu-item" data-toggle="pill" href="#d2"> <span class="fa fa-calendar"></span> Events</a>
 				    </li>
 				    <li class="nav-item">
-				    	<a class="nav-link" data-toggle="pill" href="#d3"> <span class="fa fa-bar-chart"></span> Donation Reports</a>
+				    	<a class="nav-link menu-item" data-toggle="pill" href="#d3"> <span class="fa fa-bar-chart"></span> Donation Reports</a>
 				    </li>
 				    <li class="nav-item">
-				    	<a class="nav-link" data-toggle="pill" href="#d4"> <span class="fa fa-money"></span> FundRaisers</a>
+				    	<a class="nav-link menu-item" data-toggle="pill" href="#d4"> <span class="fa fa-money"></span> FundRaisers</a>
 				    </li>
 				  </ul>
 				</div>
 			<!-- Navbar Tabs Ends -->
   				<!-- Tab panes Starts -->
-  				<div class="container">
+  				<div class="container-fluid">
   					<div class="tab-content">
   						<!-- Donate By Money Tab Starts -->
-    					<div id="home" class="container tab-pane active"><br>
-          					<div class="container">
-							    <form class="form-horizontal" role="form" method="post" >
-							      <fieldset>
-							        <legend>
-							        </legend>
-							        <!--<div class="form-group">
-							          <label class="col-sm-3 control-label" for="card-holder-name">Name</label>
-							          <div class="col-sm-9">
-							            <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
-							          </div>
-							        </div>
-							        <div class="form-group">
-							          <label class="col-sm-3 control-label" for="card-number"> Card Number</label>
-							          <div class="col-sm-9">
-							            <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
-							          </div>
-							        </div>
-							        <div class="form-group">
-							          <label class="col-sm-3 control-label" for="expiry-month">Expiration</label>
-							          <div class="col-sm-9">
-							          		<div class="row pl-3">
-							          		<div class="col-xs-6">
-							                <select class="form-control " name="expiry-month" id="expiry-month">
-							                  <option>Month</option>
-							                  <option value="01">Jan (01)</option>
-							                  <option value="02">Feb (02)</option>
-							                  <option value="03">Mar (03)</option>
-							                  <option value="04">Apr (04)</option>
-							                  <option value="05">May (05)</option>
-							                  <option value="06">June (06)</option>
-							                  <option value="07">July (07)</option>
-							                  <option value="08">Aug (08)</option>
-							                  <option value="09">Sep (09)</option>
-							                  <option value="10">Oct (10)</option>
-							                  <option value="11">Nov (11)</option>
-							                  <option value="12">Dec (12)</option>
-							                </select>
-							            	</div>
-							            	<div class="col-xs-6">
-							                <select class="form-control " name="expiry-year">
-							                  <option value="17">2017</option>
-							                  <option value="18">2018</option>
-							                  <option value="19">2019</option>
-							                  <option value="20">2020</option>
-							                  <option value="21">2021</option>
-							                  <option value="22">2022</option>
-							                  <option value="23">2023</option>
-							                </select>
-							            </div>
-
-							            </div>
-							             
-							          </div>
-							        </div>
-							        <div class="form-group">
-							          <label class="col-sm-3 control-label" for="cvv">CVV</label>
-							          <div class="col-sm-9">
-							            <input type="password" class="form-control" maxlength="3" name="cvv" id="cvv" placeholder="Security Code">
-							          </div>
-							        </div>-->
-							        <div class="form-group">
-							        	<?php 
-							        		
-                            				if(strpos($url, "field=empty") == true){
-
-                                			echo "<div class='pt-1 pb-1 pl-2 text-danger text-left'>Please fill the required Field!</div>";
-                           					 } 
-
-							        	 ?>
-							          <label class="col-sm-3 control-label" for="amount" >Amount</label>
-							          <div class="col-sm-9">
-							            <input type="number" class="form-control"  name="amount" id="amount"  placeholder="Amount">
-							          </div>
-							        </div>			
-							        <div class="form-group">
-							          <div class="col-sm-2">
-							        
-							            <button type="submit" class="btn btn-success" id="pay-now" name="pay-now" >Pay Now</button>
-
-							          </div>
-							        </div>
-							      </fieldset>
-							   </form>
-	     					</div>
+    					<div id="home" class=" tab-pane active">
+    						<div class="pl-2 pt-3 pb-2"><h5>Choose the required Payment Method</h5></div>
+    						<div class="row">
+    							<div class="col-lg-3 col-md-12">
+    								<div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+									  <a class="nav-link active pt-3 pb-3 " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Creditcard/Debitcard</a>
+									  <a class="nav-link pt-3 pb-3  " id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Paypal</a>
+									  <a class="nav-link pt-3 pb-3 " id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Quickpay</a>
+									  <a class="nav-link pt-3 pb-3 " id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Paytm</a>
+									</div>
+    							</div>
+    							<div class="col-lg-9 col-md-12">
+    								<div class="tab-content px-2" id="v-pills-tabContent">
+									  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+									  	<div class="container">
+									  		<div class="row justify-content-md-center justify-content-sm-center">
+									  			<div class="col-md-10 col-sm-12  border mt-3 mb-2" >
+									  				<div class="row pt-2 pb-2 border-bottom">
+									  					<div class="col-8">
+													  	<h6 class="d-inline-block pt-1 "><b>Payment Details</b></h6></div>
+													  	<div class="col-4 card-tile">
+													  	</div>
+													</div>
+													<div class="pt-2 pl-3 pr-3">
+									  				<form method="post">
+									  					<div class="row">
+									  						<div class="col-12">
+									  							<div class="form-group">
+									  								<label for="amount">Amount</label>
+									  								<div class="input-group">
+									  									<input type="tel" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount">
+									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-money"></i></span></div>
+									  									
+									  								</div>
+									  							</div>
+									  						</div>
+									  						
+									  					</div>
+									  					<div class="row">
+									  						<div class="col-12">
+									  							<div class="form-group">
+									  								<label for="cardnumber">Card Number</label>
+									  								<div class="input-group">
+									  									<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number">
+									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
+									  									
+									  								</div>
+									  							</div>
+									  						</div>
+									  						
+									  					</div>
+									  					<div class="row">
+									  						<div class="col-7">
+									  							<div class="form-group">
+									  								<label for="expdate">Expiry Date</label>
+									  								<div class="input-group">
+									  									<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date">
+									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+									  									
+									  								</div>
+									  							</div>
+									  						</div>
+									  						<div class="col-5">
+									  							<div class="form-group">
+									  								<label for="cardnumber">CVV</label>
+									  								<div class="input-group">
+									  									<input type="password" name="CVV" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3">
+									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-key" ></i></span></div>
+									  									
+									  								</div>
+									  							</div>
+									  						</div>
+									  					</div>
+									  					<div class="row">
+									  						<div class="col-12">
+									  							<div class="form-group text-center">
+						                                            <input type="submit" name="donate" value="Donate" class="btn btn-success pl-5 pr-5">
+						                                            
+						                                        </div> 
+									  						</div>
+									  					</div>
+									  				</form>	
+									  			</div>
+									  			</div>
+									  		</div>
+									  	</div>
+									  </div>
+									  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">B</div>
+									  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">a</div>
+									  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">d</div>
+									</div>
+								</div>
+    						</div>	
     					</div>
     					<!-- Donate By Money Tab Ends -->
     					<!-- Donate By Item Tab Starts -->
@@ -365,7 +373,7 @@
                 							<input type="hidden" name="fundid" id="fundid">                      
         								</div>
         								<div class="modal-footer">
-          									<button type="submit" class="form-control btn btn-primary btn-small" id="formGroupExampleInput" name="fundraiser">Submit</button>
+          									<button type="submit" class="form-control btn btn-primary btn-small"  name="fundraiser">Submit</button>
         								</div>
     								</form>
         							</div>

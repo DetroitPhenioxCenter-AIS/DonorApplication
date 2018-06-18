@@ -14,26 +14,26 @@ html,body{
       padding:0;
 }
 /*second nav bar styles*/
-.nav-pills > .nav-item{
+.menu > .nav-item{
 	color : white!important;
 }
-.nav-pills > .nav-item > .nav-link > .active{
+.menu > .nav-item > .nav-link > .active{
 	background-color:white!important;
 	color:#a0a0a0 !important!;
 	border-bottom: 2px solid white !important;
 }
-a {
+.menu-item {
   background-color:transparent;
   color:#111111;
   text-decoration:none;
   font-size:15px;
 }
-a:hover {
+.menu-item:hover {
   background-color:transparent;
   color:#111111;
   text-decoration:none;
 }
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.menu .menu-item.active, .menu .show > .menu-item {
   color:#111111;
   background-color: transparent;
   border-bottom:2px solid #a0a0a0;
@@ -57,7 +57,7 @@ a:hover {
    border-bottom:0.1px solid #ccc;
   
 }
-.nav {
+.menu {
   display:flex;
   flex-wrap:wrap;
   list-style:none;
@@ -73,4 +73,10 @@ a:hover {
   flex:1 1 auto;
   padding:1.25rem;
   background-color:#ffffff;
+}
+
+.card-tile{
+  background-image: url("http://i76.imgup.net/accepted_c22e0.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
