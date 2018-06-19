@@ -6,9 +6,13 @@
 
   if(isset($_POST['fundraiser'])){
 	$id = mysqli_real_escape_string($conn,$_POST['fundid']);
+	$cardname = mysqli_real_escape_string($conn,$_POST['name']);
+ 	$cardnumber = mysqli_real_escape_string($conn,$_POST['cardnumber']);
+ 	$expdate = mysqli_real_escape_string($conn,$_POST['expdate']);
+ 	$cvv = mysqli_real_escape_string($conn,$_POST['cvv']);
 	$amount = mysqli_real_escape_string($conn,$_POST['amount']);
 	$date = date("m-d-Y");
-	if( empty($amount)){
+	if( empty($cardnumber) || empty($cardname) || empty($expdate) || empty($cvv) || empty($amount)){
 		header('Location: home.php?donation=failed');
 		exit();
 	}else{

@@ -1,44 +1,7 @@
 <?php 
 
  session_start();
- include_once 'Includes/db.php';
- $username = $_SESSION['u_user_name'];
- $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
- $amount = "";
- 
- if(isset($_POST["pay-now"])){
- 	
- 	$amount = mysqli_real_escape_string($conn,$_POST['amount']);
- 	$date = date("m-d-Y");
- 	if( empty($amount)){
-
- 		header("Location: home.php?field=empty");
- 		$error = 'Please Enter the field';
- 		exit();
- 	}else{
-
- 		$sql1 = "UPDATE donors SET donation_amount=CONCAT(donation_amount,'$amount|'),date_donation=CONCAT(date_donation, '$date|') WHERE user_name='$username';";
- 		mysqli_query($conn, $sql1);
- 		$sql2 = "SELECT * FROM donors WHERE user_name='$username';";
- 		$result = mysqli_query($conn, $sql2);
- 		while($row = mysqli_fetch_assoc($result)){
- 			$array = explode('|',$row['donation_amount']);
- 			$total_amount = array_sum($array);
- 		$sql3 = "UPDATE donors SET total_donation_amount='$total_amount' WHERE user_name='$username';";
- 		mysqli_query($conn, $sql3);
- 		$_SESSION['u_total'] = $total_amount;
- 		}
-
- 		
- 	}
-
-
-}
-
-
-
-
-
+  include_once 'Includes/db.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -91,8 +54,6 @@
 			    </div>
 		  </nav>
 		  <!-- Title Bar Ends -->
-		  
-         
          	<!-- Navbar Tabs Starts -->
 			  	<div class="w-100">
 				  <ul class="nav nav-pills shadow menu"  role="tablist">
@@ -126,30 +87,61 @@
 									  <a class="nav-link active pt-3 pb-3 " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Creditcard/Debitcard</a>
 									  <a class="nav-link pt-3 pb-3  " id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Paypal</a>
 									  <a class="nav-link pt-3 pb-3 " id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Quickpay</a>
-									  <a class="nav-link pt-3 pb-3 " id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Paytm</a>
-									</div>
+								     </div>
     							</div>
     							<div class="col-lg-9 col-md-12">
     								<div class="tab-content px-2" id="v-pills-tabContent">
 									  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 									  	<div class="container">
 									  		<div class="row justify-content-md-center justify-content-sm-center">
-									  			<div class="col-md-10 col-sm-12  border mt-3 mb-2" >
+									  			<div class=" col-lg-8 col-md-10 col-sm-12  border mt-1 mb-2" >
 									  				<div class="row pt-2 pb-2 border-bottom">
 									  					<div class="col-8">
 													  	<h6 class="d-inline-block pt-1 "><b>Payment Details</b></h6></div>
 													  	<div class="col-4 card-tile">
 													  	</div>
 													</div>
+													<?php
+														$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+														if(strpos($url, "carddetails=empty") == true){
+           													echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter all  card details!</div>";
+                                      					} 
+
+                                      					elseif(strpos($url,"carddetails=wrong") == true){
+
+                                      						echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Payment Error! Please type correct card details</div>";
+
+                                      					}
+
+                                      					elseif(strpos($url,"carddetails=insufficient") == true){
+
+                                      						echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Payment Error: Insufficient Funds! Please check your balance</div>";
+
+                                      					}
+													 ?>
 													<div class="pt-2 pl-3 pr-3">
-									  				<form method="post">
+									  				<form action="card_payment.php" method="post">
+
 									  					<div class="row">
 									  						<div class="col-12">
 									  							<div class="form-group">
 									  								<label for="amount">Amount</label>
 									  								<div class="input-group">
-									  									<input type="tel" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount">
+									  									<input type="number" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount" value="<?php if(isset($_GET['amount'])) echo $_GET['amount']; ?>">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-money"></i></span></div>
+									  									
+									  								</div>
+									  							</div>
+									  						</div>
+									  						
+									  					</div>
+									  					<div class="row">
+									  						<div class="col-12">
+									  							<div class="form-group">
+									  								<label for="name">CardHolder Name</label>
+									  								<div class="input-group">
+									  									<input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="name" value="<?php if(isset($_GET['name'])) echo $_GET['name']; ?>">
+									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
 									  									
 									  								</div>
 									  							</div>
@@ -161,7 +153,7 @@
 									  							<div class="form-group">
 									  								<label for="cardnumber">Card Number</label>
 									  								<div class="input-group">
-									  									<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number">
+									  									<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number" value="<?php if(isset($_GET['cardnumber'])) echo $_GET['cardnumber']; ?>">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
 									  									
 									  								</div>
@@ -174,7 +166,7 @@
 									  							<div class="form-group">
 									  								<label for="expdate">Expiry Date</label>
 									  								<div class="input-group">
-									  									<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date">
+									  									<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date" value="<?php if(isset($_GET['expdate'])) echo $_GET['expdate']; ?>">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 									  									
 									  								</div>
@@ -182,9 +174,9 @@
 									  						</div>
 									  						<div class="col-5">
 									  							<div class="form-group">
-									  								<label for="cardnumber">CVV</label>
+									  								<label for="cvv">CVV</label>
 									  								<div class="input-group">
-									  									<input type="password" name="CVV" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3">
+									  									<input type="password" name="cvv" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3" value="<?php if(isset($_GET['cvv'])) echo $_GET['cvv']; ?>">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-key" ></i></span></div>
 									  									
 									  								</div>
@@ -310,6 +302,7 @@
     						
     					</div>
     					<!-- Donation Reports Tab Ends -->
+    					<!-- Fund Raisers Tab Starts -->
     					<div id="d4" class="container tab-pane fade">
     						<h2 class="pt-4">Fund Raisers</h2>
     						<div class="card-deck">
@@ -355,21 +348,72 @@
     							<div class="modal-dialog modal-dialog-centered">    
       								<!-- Modal content-->
       								<div class="modal-content">
-      									<?php
-                                      $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                                      if(strpos($url, "donation=failed") == true){
-                                          echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter the amount!</div>";
-                                      } 
-                                      
-                                    
-
-                                      ?>
         							<form method="POST" action='fund_data.php'>
-        								<div class="modal-body">            
-                							<div class="form-group">
-                    							<label for="formGroupExampleInput">Enter Amount</label>
-                        						<input type="number" name="amount" class="form-control" id="formGroupExampleInput" placeholder="Enter Amount">
-                							</div>    
+        								<div class="modal-body">  
+        									<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+											  <li class="nav-item">
+											    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">CreditCard/DebitCard</a>
+											  </li>
+											  <li class="nav-item">
+											    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Paypal</a>
+											  </li>
+											  <li class="nav-item">
+											    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Quickpay</a>
+											  </li>
+											</ul>  
+											<div class="tab-content" id="pills-tabContent">
+											  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+											  	<div class="form-group">
+									  				<label for="amount">Amount</label>
+									  				 <div class="input-group">
+									  					<input type="number" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount" value="<?php if(isset($_GET['amount'])) echo $_GET['amount']; ?>">
+									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-money"></i></span></div>
+									  									
+									  				</div>
+									  			</div>
+									  			<div class="form-group">
+									  				<label for="name">CardHolder Name</label>
+									  				 <div class="input-group">
+									  					<input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="name" value="<?php if(isset($_GET['name'])) echo $_GET['name']; ?>">
+									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+									  									
+									  				</div>
+									  			</div>
+									  			<div class="form-group">
+									  				<label for="cardnumber">Card Number</label>
+									  				<div class="input-group">
+									  					<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number" value="<?php if(isset($_GET['cardnumber'])) echo $_GET['cardnumber']; ?>">
+									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
+									  									
+									  				</div>
+									  			</div>
+									  			<div class="row">
+									  				<div class="col-7">
+									  				 <div class="form-group">
+									  					<label for="expdate">Expiry Date</label>
+									  						<div class="input-group">
+									  							<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date" value="<?php if(isset($_GET['expdate'])) echo $_GET['expdate']; ?>">
+									  							<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+									  									
+									  						</div>
+									  				</div>
+									  				</div>
+									  				<div class="col-5">
+									  				<div class="form-group">
+									  					<label for="cvv">CVV</label>
+									  					<div class="input-group">
+									  					<input type="password" name="cvv" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3" value="<?php if(isset($_GET['cvv'])) echo $_GET['cvv']; ?>">
+									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-key" ></i></span></div>
+									  									
+									  					</div>
+									  				</div>
+									  				</div>
+									  			</div>
+											  </div>
+											  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+											  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+											</div>        
+                							   
                 							<input type="hidden" name="fundid" id="fundid">                      
         								</div>
         								<div class="modal-footer">
@@ -381,7 +425,7 @@
     						</div>
     						
     					</div>
-
+    					<!-- Fundraiser Tab Ends -->
   					</div> 
  		 		</div>
  		 		<!-- Tab Panes Ends -->
