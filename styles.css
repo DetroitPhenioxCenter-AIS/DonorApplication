@@ -12,7 +12,11 @@ html,body{
 
 .container-fluid{
       padding:0;
+     
 }
+
+
+
 /*second nav bar styles*/
 .menu > .nav-item{
 	color : white!important;
@@ -41,7 +45,6 @@ html,body{
 }
 #adminpage{
 	background-color: #fafafa;
-  overflow: hidden !important;
 }
 .navbar {
   -webkit-box-align:center;

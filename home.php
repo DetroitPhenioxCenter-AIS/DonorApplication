@@ -72,6 +72,9 @@
 				    <li class="nav-item">
 				    	<a class="nav-link menu-item" data-toggle="pill" href="#d4"> <span class="fa fa-money"></span> FundRaisers</a>
 				    </li>
+				    <li class="nav-item">
+				    	<a class="nav-link menu-item" data-toggle="pill" href="#d5"> <span class="fa fa-group"></span> Create Events</a>
+				    </li>
 				  </ul>
 				</div>
 			<!-- Navbar Tabs Ends -->
@@ -303,7 +306,7 @@
     					</div>
     					<!-- Donation Reports Tab Ends -->
     					<!-- Fund Raisers Tab Starts -->
-    					<div id="d4" class="container tab-pane fade">
+    					<div id="d4" class="container tab-pane fade ">
     						<h2 class="pt-4">Fund Raisers</h2>
     						<div class="card-deck">
     							<div class="row">
@@ -313,7 +316,7 @@
 						    		$result = mysqli_query($conn,$sql);
 						    		while($row = mysqli_fetch_assoc($result)){
 						    			$amount_received = ($row['amount_received']/$row['actual_amount'])*100;
-						    			echo '<div class="col-md-4 col-sm-6"><div class="card" style="height: 450px; overflow:hidden;">
+						    			echo '<div class="col-lg-4 col-md-6"><div class="card" style="height: 450px; overflow:hidden;">
 						    					<img class="card-img-top" src="img/fundraising.jpg" >
 							    				<div class="card-body ">
 							    					<h5 class="card-title text-center">'.$row['fund_name'].'</h5>
@@ -426,6 +429,71 @@
     						
     					</div>
     					<!-- Fundraiser Tab Ends -->
+    					<!-- Create Events Tab starts -->
+    					
+    					<div id="d5" class="container tab-pane fade">
+    						<div class="row">
+    							<div class="col-lg-6 col-12 text-center pb-3">
+    								<div class=" pt-5 pb-3">
+    									<h4 >Create Your Own Events And Help Us By Contributing to the Community</h4>
+    								</div>
+    								<div >
+    									<img src="img/create-events.jpg">
+    								</div>
+    							</div>
+    							<div class="col-lg-6 col-12  mt-5 pl-1 pr-1 pt-3">
+    								<?php
+											
+										$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+										if(strpos($url, "event=empty") == true){
+           								echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter all event details!</div>";
+                                      					}
+
+                                      	elseif(strpos($url, "event=dateerror") == true){
+           								echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter the date in mm-dd-yyyy format!</div>";
+                                      					}
+
+                                      	 ?>
+    								<form action="event_data.php?tabid=d5" method="post">
+    									<div class="form-group">
+									  		<label for="event-name">Event Name</label>
+									  			<div class="input-group">
+									  				<input type="text" name="event-name" class="form-control" placeholder="Enter the Name of the Event" value="<?php if(isset($_GET['event-name'])) echo $_GET['event-name']; ?>">
+									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-group"></i></span></div>
+									  									
+									  			</div>
+									  	</div>
+									  	<div class="form-group">
+									  		<label for="event-name">Event Date</label>
+									  			<div class="input-group">
+									  				<input type="text" name="event-date" class="form-control" placeholder="Date Format: MM-DD-YYYY" value="<?php if(isset($_GET['event-date'])) echo $_GET['event-date']; ?>">
+									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+									  									
+									  			</div>
+									  	</div>
+									  	<div class="form-group">
+									  		<label for="event-name">Event Venue</label>
+									  			<div class="input-group">
+									  				<input type="text" name="event-venue" class="form-control" placeholder="Enter the Name of the Event Venue" value="<?php if(isset($_GET['event-venue'])) echo $_GET['event-venue']; ?>">
+									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-institution"></i></span></div>
+									  									
+									  			</div>
+									  	</div>
+									  	<div class="form-group">
+									  		<label for="event-name">Event Description</label>
+									  			<div class="input-group">
+									  				<textarea name="description" class="form-control" placeholder="Event Description should not be more than two lines" value="<?php if(isset($_GET['description'])) echo $_GET['description']; ?>" row="2"></textarea>
+									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-sticky-note"></i></span></div>
+									  									
+									  			</div>
+									  	</div>
+
+									  	<div class="form-group"><button type="submit" class="form-control btn btn-primary btn-large"  name="create">Create Event</button></div>
+    								</form>
+    							</div>
+    						</div>
+    					</div>
+    					<!-- Create Events Tab ends -->
   					</div> 
  		 		</div>
  		 		<!-- Tab Panes Ends -->

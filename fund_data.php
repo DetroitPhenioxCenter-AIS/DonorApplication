@@ -13,7 +13,7 @@
 	$amount = mysqli_real_escape_string($conn,$_POST['amount']);
 	$date = date("m-d-Y");
 	if( empty($cardnumber) || empty($cardname) || empty($expdate) || empty($cvv) || empty($amount)){
-		header('Location: home.php?donation=failed');
+		header('Location: home.php?donation=failed&name=$cardname&cardnumber=$cardnumber&expdate=$expdate&cvv=$cvv&amount=$amount');
 		exit();
 	}else{
   	 $sql = "UPDATE fundraiser SET amount_received= amount_received +'$amount' WHERE fund_id='$id';";
