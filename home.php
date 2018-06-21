@@ -28,6 +28,7 @@
    <body id="adminpage">
      <div class="container-fluid">
      	<!-- Title Bar Starts -->
+
          <nav class="navbar navbar-expand-lg ">
 			    <a class="navbar-brand" href="#"><img class="img-responsive" height="40" src="http://www.detroitphoenixcenter.org/images/layer%200.png?crc=3873543260"></a>
 			    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,6 +81,30 @@
 			<!-- Navbar Tabs Ends -->
   				<!-- Tab panes Starts -->
   				<div class="container-fluid">
+  					<!-- alert for payments starts -->
+  					<!--<div class="row justify-content-md-center payment-alert">
+  						<div class="col-12">
+  							<div class="alert alert-success alert-dismissible fade show" role="alert">
+							  <strong>Your Payment has been Successfully Done!</strong>
+							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+  						</div>
+  					</div>-->
+  					<!-- alert for payments ends -->
+  					<!-- alert for events starts -->
+  					<div class="row justify-content-md-center event-alert">
+  						<div class="col-12">
+  							<div class="alert alert-success alert-dismissible fade show" role="alert">
+							  <strong>Your Event has been Successfully Created!</strong>
+							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+  						</div>
+  					</div>
+  					<!-- alert for events ends -->
   					<div class="tab-content">
   						<!-- Donate By Money Tab Starts -->
     					<div id="home" class=" tab-pane active">
@@ -123,7 +148,7 @@
                                       					}
 													 ?>
 													<div class="pt-2 pl-3 pr-3">
-									  				<form action="card_payment.php" method="post">
+									  				<form action="card_payment.php" method="post" id="card-payment">
 
 									  					<div class="row">
 									  						<div class="col-12">
@@ -442,23 +467,12 @@
     								</div>
     							</div>
     							<div class="col-lg-6 col-12  mt-5 pl-1 pr-1 pt-3">
-    								<?php
-											
-										$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-										if(strpos($url, "event=empty") == true){
-           								echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter all event details!</div>";
-                                      					}
-
-                                      	elseif(strpos($url, "event=dateerror") == true){
-           								echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Please enter the date in mm-dd-yyyy format!</div>";
-                                      					}
-
-                                      	 ?>
-    								<form action="event_data.php?tabid=d5" method="post">
+                                     <div class='pt-1 pb-1 pl-2 text-danger text-center' id="event-error">Please Enter All The Details </div>
+    								<form >
     									<div class="form-group">
 									  		<label for="event-name">Event Name</label>
 									  			<div class="input-group">
-									  				<input type="text" name="event-name" class="form-control" placeholder="Enter the Name of the Event" value="<?php if(isset($_GET['event-name'])) echo $_GET['event-name']; ?>">
+									  				<input type="text" name="event-name" class="form-control" id="event-name" placeholder="Enter the Name of the Event" value="">
 									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-group"></i></span></div>
 									  									
 									  			</div>
@@ -466,7 +480,7 @@
 									  	<div class="form-group">
 									  		<label for="event-name">Event Date</label>
 									  			<div class="input-group">
-									  				<input type="text" name="event-date" class="form-control" placeholder="Date Format: MM-DD-YYYY" value="<?php if(isset($_GET['event-date'])) echo $_GET['event-date']; ?>">
+									  				<input type="text" name="event-date" class="form-control" placeholder="Date Format: MM-DD-YYYY" id="event-date" value="">
 									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 									  									
 									  			</div>
@@ -474,7 +488,7 @@
 									  	<div class="form-group">
 									  		<label for="event-name">Event Venue</label>
 									  			<div class="input-group">
-									  				<input type="text" name="event-venue" class="form-control" placeholder="Enter the Name of the Event Venue" value="<?php if(isset($_GET['event-venue'])) echo $_GET['event-venue']; ?>">
+									  				<input type="text" name="event-venue" class="form-control" id="event-venue" placeholder="Enter the Name of the Event Venue" value="">
 									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-institution"></i></span></div>
 									  									
 									  			</div>
@@ -482,13 +496,13 @@
 									  	<div class="form-group">
 									  		<label for="event-name">Event Description</label>
 									  			<div class="input-group">
-									  				<textarea name="description" class="form-control" placeholder="Event Description should not be more than two lines" value="<?php if(isset($_GET['description'])) echo $_GET['description']; ?>" row="2"></textarea>
+									  				<textarea name="description" class="form-control" placeholder="Event Description should not be more than two lines" id="description" value="" row="2"></textarea>
 									  				<div class="input-group-append"><span class="input-group-text"><i class="fa fa-sticky-note"></i></span></div>
 									  									
 									  			</div>
 									  	</div>
 
-									  	<div class="form-group"><button type="submit" class="form-control btn btn-primary btn-large"  name="create">Create Event</button></div>
+									  	<div class="form-group"><button type="submit" id="create" class="form-control btn btn-primary btn-large"  name="create">Create Event</button></div>
     								</form>
     							</div>
     						</div>
@@ -503,13 +517,51 @@
 
       <!-- Optional JavaScript -->
       <script type="text/javascript">
+      	$('document').ready(function(){
+      		$('#event-error').hide();
+      		$('.event-alert').hide();
+      	// event form submission
+      	$('#create').click(function(){
+      		$('#event-error').hide();
+      		var event_name = $('#event-name').val();
+      		var event_date = $('#event-date').val();
+      		var event_venue = $('#event-venue').val();
+      		var description = $('#description').val();
+      		var data = 'event-name='+ event_name + '&event-date=' + event_date  + '&event-venue=' + event_venue + '&description=' + description;
+      		if( event_name == "" || event_date == "" || event_venue == "" || description == "")
+      		{
+      			$('#event-error').show();
+      			return false;
+      		}
+      		else{
+
+      			$.ajax({
+      				type: "POST",
+      				url: "event_data.php",
+      				data: data,
+      				success: function(){
+      					$('.event-alert').show();
+      				}
+      			});
+      			$('#event-name').val("");
+      			$('#event-date').val("");
+      			$('#event-venue').val("");
+      			$('#description').val("");
+      			return false;
+      		}
+
+      	});
+
+       // Getting the id value of particular fundraiser
     	$('.fundid').on('click', function (e) {
        		$('#fundid').val($(this).attr("data-id"));       
     	});
+
+      // Assigning the fundid to modal
     	$('#exampleModalCenter').on('hidden.bs.modal', function () {
         $('#fundid').val('');
     		});
-
+    });
      </script>
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
      

@@ -11,12 +11,16 @@ html,body{
 }
 
 .container-fluid{
-      padding:0;
+  padding:0;
      
 }
+.event-alert, .payment-alert{
 
-
-
+ position: fixed !important;
+ top: 1% !important;
+ left:35% !important;
+ z-index: 9999;
+}
 /*second nav bar styles*/
 .menu > .nav-item{
 	color : white!important;
