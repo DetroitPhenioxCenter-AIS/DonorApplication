@@ -81,18 +81,19 @@
 			<!-- Navbar Tabs Ends -->
   				<!-- Tab panes Starts -->
   				<div class="container-fluid">
-  					<!-- alert for payments starts -->
-  					<!--<div class="row justify-content-md-center payment-alert">
-  						<div class="col-12">
-  							<div class="alert alert-success alert-dismissible fade show" role="alert">
-							  <strong>Your Payment has been Successfully Done!</strong>
-							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							    <span aria-hidden="true">&times;</span>
-							  </button>
+  					<!-- alert for payment starts -->
+  					<div class="row justify-content-md-center payment-alert">
+						<div class="col-12">
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<strong>Your Payment has been Successfully Done!</strong>
+								<p> Please Check your mail for confirmation </p>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
-  						</div>
-  					</div>-->
-  					<!-- alert for payments ends -->
+						</div>
+					</div>
+					<!-- alert for payment ends -->
   					<!-- alert for events starts -->
   					<div class="row justify-content-md-center event-alert">
   						<div class="col-12">
@@ -141,21 +142,32 @@
 
                                       					}
 
-                                      					elseif(strpos($url,"carddetails=insufficient") == true){
+                                      					elseif(strpos($url,"payment=success") == true){
 
-                                      						echo "<div class='pt-1 pb-1 pl-2 text-danger text-center'>Payment Error: Insufficient Funds! Please check your balance</div>";
+                                      						echo '<div class="row justify-content-md-center card-payment">
+												  						<div class="col-12">
+												  							<div class="alert alert-success alert-dismissible fade show" role="alert">
+																			  <strong>Your Payment has been Successfully Done!</strong>
+																			  <p> Please Check your mail for confirmation </p>
+																			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																			    <span aria-hidden="true">&times;</span>
+																			  </button>
+																			</div>
+												  						</div>
+												  					</div>';
 
                                       					}
 													 ?>
+													 
 													<div class="pt-2 pl-3 pr-3">
-									  				<form action="card_payment.php" method="post" id="card-payment">
+									  				<form action="card_payment.php" method="post" >
 
 									  					<div class="row">
 									  						<div class="col-12">
 									  							<div class="form-group">
 									  								<label for="amount">Amount</label>
 									  								<div class="input-group">
-									  									<input type="number" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount" value="<?php if(isset($_GET['amount'])) echo $_GET['amount']; ?>">
+									  									<input type="number" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount" value="<?php if(isset($_GET['amount'])) echo $_GET['amount']; ?>" id="amount">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-money"></i></span></div>
 									  									
 									  								</div>
@@ -166,9 +178,9 @@
 									  					<div class="row">
 									  						<div class="col-12">
 									  							<div class="form-group">
-									  								<label for="name">CardHolder Name</label>
+									  								<label for="cardname">CardHolder Name</label>
 									  								<div class="input-group">
-									  									<input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="name" value="<?php if(isset($_GET['name'])) echo $_GET['name']; ?>">
+									  									<input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="name" value="<?php if(isset($_GET['name'])) echo $_GET['name']; ?>" id="cardname">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
 									  									
 									  								</div>
@@ -181,7 +193,7 @@
 									  							<div class="form-group">
 									  								<label for="cardnumber">Card Number</label>
 									  								<div class="input-group">
-									  									<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number" value="<?php if(isset($_GET['cardnumber'])) echo $_GET['cardnumber']; ?>">
+									  									<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number" value="<?php if(isset($_GET['cardnumber'])) echo $_GET['cardnumber']; ?>" id="cardnumber">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
 									  									
 									  								</div>
@@ -194,7 +206,7 @@
 									  							<div class="form-group">
 									  								<label for="expdate">Expiry Date</label>
 									  								<div class="input-group">
-									  									<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date" value="<?php if(isset($_GET['expdate'])) echo $_GET['expdate']; ?>">
+									  									<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date" value="<?php if(isset($_GET['expdate'])) echo $_GET['expdate']; ?>" id="expdate">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 									  									
 									  								</div>
@@ -204,7 +216,7 @@
 									  							<div class="form-group">
 									  								<label for="cvv">CVV</label>
 									  								<div class="input-group">
-									  									<input type="password" name="cvv" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3" value="<?php if(isset($_GET['cvv'])) echo $_GET['cvv']; ?>">
+									  									<input type="password" name="cvv" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3" value="<?php if(isset($_GET['cvv'])) echo $_GET['cvv']; ?>" id="cvv">
 									  									<div class="input-group-append"><span class="input-group-text"><i class="fa fa-key" ></i></span></div>
 									  									
 									  								</div>
@@ -214,7 +226,7 @@
 									  					<div class="row">
 									  						<div class="col-12">
 									  							<div class="form-group text-center">
-						                                            <input type="submit" name="donate" value="Donate" class="btn btn-success pl-5 pr-5">
+						                                            <input type="submit" name="donate" id="donate" value="Donate" class="btn btn-success pl-5 pr-5">
 						                                            
 						                                        </div> 
 									  						</div>
@@ -376,7 +388,8 @@
     							<div class="modal-dialog modal-dialog-centered">    
       								<!-- Modal content-->
       								<div class="modal-content">
-        							<form method="POST" action='fund_data.php'>
+
+        							<form >
         								<div class="modal-body">  
         									<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 											  <li class="nav-item">
@@ -389,12 +402,13 @@
 											    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Quickpay</a>
 											  </li>
 											</ul>  
+											<div class='pt-1 pb-1 pl-2 text-danger text-center' id="payment-error">Please enter all  card details!</div>
 											<div class="tab-content" id="pills-tabContent">
 											  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 											  	<div class="form-group">
 									  				<label for="amount">Amount</label>
 									  				 <div class="input-group">
-									  					<input type="number" name="amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount" value="<?php if(isset($_GET['amount'])) echo $_GET['amount']; ?>">
+									  					<input type="number" name="amount" id="modal_amount" class="form-control" placeholder="Enter Donation amount" autocomplete="amount" value="">
 									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-money"></i></span></div>
 									  									
 									  				</div>
@@ -402,7 +416,7 @@
 									  			<div class="form-group">
 									  				<label for="name">CardHolder Name</label>
 									  				 <div class="input-group">
-									  					<input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="name" value="<?php if(isset($_GET['name'])) echo $_GET['name']; ?>">
+									  					<input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="name" id="modal_name" value="">
 									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
 									  									
 									  				</div>
@@ -410,7 +424,7 @@
 									  			<div class="form-group">
 									  				<label for="cardnumber">Card Number</label>
 									  				<div class="input-group">
-									  					<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number" value="<?php if(isset($_GET['cardnumber'])) echo $_GET['cardnumber']; ?>">
+									  					<input type="tel" name="cardnumber" class="form-control" placeholder="Valid Card Number" autocomplete="cc-number" value="" id="modal_number">
 									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
 									  									
 									  				</div>
@@ -420,7 +434,7 @@
 									  				 <div class="form-group">
 									  					<label for="expdate">Expiry Date</label>
 									  						<div class="input-group">
-									  							<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date" value="<?php if(isset($_GET['expdate'])) echo $_GET['expdate']; ?>">
+									  							<input type="tel" name="expdate" class="form-control" placeholder="MM/YY" autocomplete="exp-date" value="" id="modal_expdate">
 									  							<div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 									  									
 									  						</div>
@@ -430,7 +444,7 @@
 									  				<div class="form-group">
 									  					<label for="cvv">CVV</label>
 									  					<div class="input-group">
-									  					<input type="password" name="cvv" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3" value="<?php if(isset($_GET['cvv'])) echo $_GET['cvv']; ?>">
+									  					<input type="password" name="cvv" class="form-control" placeholder="Enter CVV" autocomplete="cvv" maxlength="3" value="" id="modal_cvv">
 									  					<div class="input-group-append"><span class="input-group-text"><i class="fa fa-key" ></i></span></div>
 									  									
 									  					</div>
@@ -445,7 +459,7 @@
                 							<input type="hidden" name="fundid" id="fundid">                      
         								</div>
         								<div class="modal-footer">
-          									<button type="submit" class="form-control btn btn-primary btn-small"  name="fundraiser">Submit</button>
+          									<button type="submit" class="form-control btn btn-primary btn-small"  name="fundraiser" id="fundraiser">Submit</button>
         								</div>
     								</form>
         							</div>
@@ -520,13 +534,48 @@
       	$('document').ready(function(){
       		$('#event-error').hide();
       		$('.event-alert').hide();
+      		$('#payment-error').hide();
+      		$('.payment-alert').hide();
+      	// fundraiser modal form submission
+      	$('#fundraiser').click(function(){
+      		var cardname = $('#modal_name').val();
+      		var cardnumber = $('#modal_number').val();
+      		var amount = $('#modal_amount').val();
+      		var expdate = $('#modal_expdate').val();
+      		var cvv = $('#modal_cvv').val();
+      		var fundid = $('#fundid').val();
+      		var payment_data = 'card-name=' + cardname + '&card-number=' + cardnumber + '&amount=' + amount + '&expdate=' + expdate + "&cvv=" + cvv  + '&fundid=' + fundid;
+      		if( cardname == "" || cardnumber == "" || amount == "" || expdate == "" || amount == "")
+      		{
+      			$('#payment-error').show();
+      			return false;
+      		}
+      		else{
+
+      			$.ajax({
+      				type: "POST",
+      				url: "fund_data.php",
+      				data: payment_data,
+      				success: function(){
+      					$('.payment-alert').delay(1000).show();
+      				}
+      			});
+      			$('#modal_name').val("");
+      			$('#modal_number').val("");
+      			$('#modal_amount').val("");
+      			$('#modal_expdate').val("");
+      			$('#modal_cvv').val("");
+      			return false;
+      		}
+      	});
+
       	// event form submission
       	$('#create').click(function(){
-      		$('#event-error').hide();
       		var event_name = $('#event-name').val();
       		var event_date = $('#event-date').val();
       		var event_venue = $('#event-venue').val();
       		var description = $('#description').val();
+
       		var data = 'event-name='+ event_name + '&event-date=' + event_date  + '&event-venue=' + event_venue + '&description=' + description;
       		if( event_name == "" || event_date == "" || event_venue == "" || description == "")
       		{
@@ -540,6 +589,7 @@
       				url: "event_data.php",
       				data: data,
       				success: function(){
+      					
       					$('.event-alert').show();
       				}
       			});

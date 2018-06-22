@@ -44,7 +44,7 @@
  						$sql3 = "UPDATE donors SET total_donation_amount='$total_amount' WHERE user_name='$username';";
  						mysqli_query($conn, $sql3);
  						$_SESSION['u_total'] = $total_amount;
- 	
+ 						card_payment();
  						header("Location: home.php?payment=success");
  						exit();
  					}

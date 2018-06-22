@@ -14,7 +14,7 @@ html,body{
   padding:0;
      
 }
-.event-alert, .payment-alert{
+.event-alert, .payment-alert, .card-payment{
 
  position: fixed !important;
  top: 1% !important;
