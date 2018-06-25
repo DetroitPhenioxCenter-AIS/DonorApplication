@@ -27,7 +27,9 @@
  		mysqli_query($conn, $sql3);
  		$_SESSION['u_total'] = $total_amount;
  	}
- 	card_payment();
+ 	fund_payment();
+
+ 	
 
 	
   

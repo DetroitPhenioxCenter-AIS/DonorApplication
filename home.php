@@ -557,7 +557,11 @@
       				url: "fund_data.php",
       				data: payment_data,
       				success: function(){
-      					$('.payment-alert').delay(1000).show();
+      					 $('#exampleModalCenter').hide();
+      					 $('body').removeClass('modal-open');
+						 $('.modal-backdrop').remove();
+						 $('.payment-alert').delay(1000).show();
+
       				}
       			});
       			$('#modal_name').val("");
