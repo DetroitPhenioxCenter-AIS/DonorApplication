@@ -3,19 +3,20 @@
 	include_once 'Includes/db.php';
 	include_once 'mail.php';
     $event_string = '';
+    $volunteer = '';
 if(isset($_POST['volunteer-submit'])){
 	$first_name = mysqli_real_escape_string($conn,$_POST['first-name']);
 	$last_name = mysqli_real_escape_string($conn,$_POST['last-name']);
 	$event_name = implode(', ', $_POST['event']);
 	$number = mysqli_real_escape_string($conn,$_POST['phone']);
 	$email = mysqli_real_escape_string($conn,$_POST['email']);
-	$volunteer_type = mysqli_real_escape_string($conn,$_POST['reason']);
+	$volunteer_type = implode(', ', $_POST['volunteer']);
 	$address = mysqli_real_escape_string($conn,$_POST['address']);
 	
 	// Check for Empty Inputs 
-	if(empty($first_name) || empty($email) ||  empty($volunteer_type) ) {
+	if(empty($first_name) || empty($email) ||  empty($volunteer_type) || empty($event_name) ) {
 		
-		header("Location: volunteer.php?signup=empty&first-name=$first_name&last-name=$last_name&phone=$number&email=$email&event-name=$event_name&reason=$volunteer_type&address=$address");
+		header("Location: volunteer.php?signup=empty&first-name=$first_name&last-name=$last_name&phone=$number&email=$email&address=$address");
 		exit();
 	} else {
 				// Check whether the input chars are valid
@@ -36,7 +37,7 @@ if(isset($_POST['volunteer-submit'])){
 									$row = mysqli_fetch_assoc($result);
 							        if ($email==$row['email'])
 							        {
-							            header("Location: volunteer.php?signup=volunteertaken&first-name=$first_name&last-name=$last_name&phone=$number&email=$email&event-name=$event_name&reason=$volunteer_type&address=$address");
+							            header("Location: volunteer.php?signup=volunteertaken&first-name=$first_name&last-name=$last_name&phone=$number&email=$email&address=$address");
 							            exit();
 							        }
 							       
@@ -58,8 +59,9 @@ if(isset($_POST['volunteer-submit'])){
 									While($row = mysqli_fetch_assoc($result))
 										{
 											$event_string = $row['event_name'];
+											$volunteer = $row['volunteer_type'];
 										}
-									volunteer_mail($event_string);
+									volunteer_mail($event_string,$volunteer);
 									header("Location: thanks_registration.php?registration=success");
 		    						exit();
 

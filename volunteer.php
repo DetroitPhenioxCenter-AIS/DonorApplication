@@ -41,7 +41,8 @@ include_once 'website_head.php';
 
                                       ?>
                                     <form action="volunteer_data.php" method="post">
-                                        <div class="col-auto">
+                                      <div class="row">
+                                        <div class="col-lg-6 col-12">
                                           <label class="sr-only" for="inlineFormInputGroup">Firstname</label>
                                           <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -50,7 +51,7 @@ include_once 'website_head.php';
                                             <input type="text" class="form-control" id="inlineFormInputGroup" name="first-name" placeholder="Firstname" value="<?php if(isset($_GET['first-name'])) echo $_GET['first-name'] ?>">
                                           </div>
                                         </div>
-                                        <div class="col-auto">
+                                        <div class=" col-lg-6 col-12">
                                           <label class="sr-only" for="inlineFormInputGroup">Lastname</label>
                                           <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -59,7 +60,9 @@ include_once 'website_head.php';
                                             <input type="text" class="form-control" id="inlineFormInputGroup" name="last-name" placeholder="Lastname(Optional)" value="<?php if(isset($_GET['last-name'])) echo $_GET['last-name'] ?>">
                                           </div>
                                         </div>
-                                        <div class="col-auto">
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-lg-6 col-12">
                                           <label class="sr-only" for="inlineFormInputGroup">Phone</label>
                                           <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -68,7 +71,7 @@ include_once 'website_head.php';
                                             <input type="tel" class="form-control" id="inlineFormInputGroup" name="phone" placeholder="Phone Number(Optional)" value="<?php if(isset($_GET['phone'])) echo $_GET['phone'] ?>">
                                           </div>
                                         </div>
-                                        <div class="col-auto">
+                                        <div class="col-lg-6 col-12">
                                           <label class="sr-only" for="inlineFormInputGroup1">Email</label>
                                           <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -77,7 +80,8 @@ include_once 'website_head.php';
                                             <input type="email" class="form-control" name="email" id="inlineFormInputGroup1" placeholder="E-Mail" value="<?php if(isset($_GET['email'])) echo $_GET['email'] ?>">
                                           </div>
                                         </div>
-                                        <div class="col-auto">
+                                      </div>
+                                        <div class="col-auto pl-0 pr-0">
                                           <label class="sr-only" for="inlineFormInputGroup1">Street Address</label>
                                           <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -86,17 +90,17 @@ include_once 'website_head.php';
                                             <input type="text" class="form-control" name="address" id="inlineFormInputGroup1" placeholder="Street Address(Optional)" value="<?php if(isset($_GET['address'])) echo $_GET['address'] ?>">
                                           </div>
                                         </div>
-                                        <div class="col-auto">
-                                          <div class="input-group mb-1 event-box pt-2 pb-1 pl-2 pr-1">
-                                            <label class="border-bottom border-dark text-center">Which Events Would You Like to volunteer?</label>
+                                        <div class="col-auto pl-0 pr-0">
+                                          <div class="input-group mb-3 event-box pt-2 pb-1 pl-2 pr-1">
+                                            <label class=" text-center">Which Events Would You Like to volunteer?</label>
                                             <div class="row">
-                                              <div class="col-4"><div class="form-check">
+                                              <div class="col-lg-4 col-6"><div class="form-check">
                                                 <label class="form-check-label">
                                                 <input class="form-check-input" name="event[]" type="checkbox"  value="All Events">
                                                 <span style="font-size: 15px;">All Events</span>
                                               </label>
                                               </div></div>
-                                              <div class="col-4">
+                                              <div class="col-lg-4 col-6">
                                                 <div class="form-check">
                                                   <label class="form-check-label">
                                                     <input class="form-check-input" name="event[]" type="checkbox"  value="Wine Tasting Event">
@@ -104,46 +108,66 @@ include_once 'website_head.php';
                                                   </label>
                                                 </div>
                                               </div>
-                                              <div class="col-4"><div class="form-check">
+                                              <div class="col-lg-4 col-6"><div class="form-check">
                                                 <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" name="event[]"  value="Shopping Event">
                                                 <span style="font-size: 15px;">Shopping </span>                          
                                               </label>
                                               </div></div>
-                                              <div class="col-4"><div class="form-check">
+                                              <div class="col-lg-4 col-6"><div class="form-check">
                                                 <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" name="event[]" value="Basketball Charity Event">
                                                 <span style="font-size: 15px;">Basketball Charity </span>
                                               </label>
                                               </div></div>
                                               
-                                              <div class="col-4"><div class="form-check">
+                                              <div class="col-lg-4 col-6"><div class="form-check">
                                                 <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" name="event[]"  value="As Needed">
                                                <span style="font-size: 15px;">As Needed</span>
                                               </label>
                                               </div></div>
-                                              
-                                              
-                                              
-                                              
-                                            
                                           </div>
-                                            <!--<select  class="form-control" name="event-name">
-										      <option value="">Which Event Would You Like to Volunteer </option>
-										      <option value="Wine Tasting Event">Wine Tasting Event</option>
-										      <option value="Shopping Event">Shopping Event</option>
-										      <option value="Basketball Charity Event">Basketball Charity Event</option>
-										      <option value="All Events">All Events</option>
-										      <option value="As Needed">As Needed</option>
-										    </select>-->
                                           </div>
                                         </div>
-
-                                        <div class="col-auto">
-                                          
-                                          <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="inlineFormInputGroup" name="reason" placeholder="How You Would Like to Volunteer?" value="<?php if(isset($_GET['reason'])) echo $_GET['reason'] ?>">
+                                        <div class="col-auto pl-0 pr-0">
+                                          <div class="input-group mb-3 event-box pt-2 pb-1 pl-2 pr-1">
+                                            <label class=" text-center">How You Would Like to Volunteer?</label>
+                                            <div class="row">
+                                              <div class="col-lg-4 col-6"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" name="volunteer[]" type="checkbox"  value="Cooking">
+                                                <span style="font-size: 15px;">Cooking</span>
+                                              </label>
+                                              </div></div>
+                                              <div class="col-lg-4 col-6">
+                                                <div class="form-check">
+                                                  <label class="form-check-label">
+                                                    <input class="form-check-input" name="volunteer[]" type="checkbox"  value="Decoration">
+                                                    <span style="font-size: 15px;">Decoration</span> 
+                                                  </label>
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-4 col-6"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="volunteer[]"  value="Serving People">
+                                                <span style="font-size: 15px;">Serving People</span>                          
+                                              </label>
+                                              </div></div>
+                                              <div class="col-lg-4 col-6"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="volunteer[]" value="Managing People">
+                                                <span style="font-size: 15px;">Managing People </span>
+                                              </label>
+                                              </div></div>
+                                              
+                                              <div class="col-lg-4 col-6"><div class="form-check">
+                                                <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="volunteer[]"  value="As Needed">
+                                               <span style="font-size: 15px;">As Needed</span>
+                                              </label>
+                                              </div></div>
+                                          </div>
                                           </div>
                                         </div>
                                        

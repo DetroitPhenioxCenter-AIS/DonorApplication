@@ -54,7 +54,7 @@
 		    
 	}
 
-	function volunteer_mail($events){
+	function volunteer_mail($events,$types){
 
 		$mail = new PHPMailer;
 
@@ -85,7 +85,7 @@
 		          					
 		            
 		            $mail->Body .='<h3>Hello!&nbsp;'.$_POST['first-name'].'</h3>
-		            <h3>THANK YOU! for joining as a volunteer and helping us in '.$events.'.</h3>
+		            <h5>THANK YOU! for joining as a volunteer and helping us in '.$events.'.</h5>
 		            
 		            
 		            <p> Looking forward to meet you in these events. </p>

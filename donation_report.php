@@ -10,7 +10,10 @@ include_once 'website_head.php';
 	<div class="container w-50">
 		<div class="text-center pb-2 pt-2">
 
-         <button class="btn btn-primary " onclick="printDiv('printableArea')">Print Report</button></div>
+         <button class="btn btn-primary " onclick="printDiv('printableArea')">Print Report</button>
+         <a href="home.php" class="btn btn-success "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back To Home</a>
+    </div>
+
 		<div id="printableArea">
 		<div class="head_image text-center pt-4 pb-2" >
               <img src="img/logo.png" class="img-fluid">

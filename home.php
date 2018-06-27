@@ -110,6 +110,7 @@
   						<!-- Donate By Money Tab Starts -->
     					<div id="home" class=" tab-pane active">
     						<div class="pl-2 pt-3 pb-2"><h5>Choose the required Payment Method</h5></div>
+    						<!-- Different Payment Tab Starts -->
     						<div class="row">
     							<div class="col-lg-3 col-md-12">
     								<div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -118,6 +119,7 @@
 									  <a class="nav-link pt-3 pb-3 " id="v-pills-quickpay-tab" data-toggle="pill" href="#v-pills-quickpay" role="tab" aria-controls="v-pills-quickpay" aria-selected="false">Quickpay</a>
 								     </div>
     							</div>
+    							<!-- Different Payment Tab Ends -->
     							<div class="col-lg-9 col-md-12">
     								<div class="tab-content px-2" id="v-pills-tabContent">
 									  <div class="tab-pane fade show active" id="v-pills-card" role="tabpanel" aria-labelledby="v-pills-card-tab">
@@ -297,7 +299,7 @@
 						    			$result = mysqli_query($conn,$sql);
 						    			while($row = mysqli_fetch_assoc($result)){
 
-						    				echo '<div class="col-md-3 col-sm-6 mb-3"><div class="card">
+						    				echo '<div class="col-lg-3 col-sm-6 col-12 mb-3"><div class="card">
 							    					<img class="card-img-top" src="img/events.jpg" he>
 							    <div class="card-body text-center">
 							      <h5 class="card-title">'.$row['event_name'].'</h5>
@@ -352,7 +354,7 @@
 						    		$result = mysqli_query($conn,$sql);
 						    		while($row = mysqli_fetch_assoc($result)){
 						    			$amount_received = ($row['amount_received']/$row['actual_amount'])*100;
-						    			echo '<div class="col-lg-4 col-md-6"><div class="card" style="height: 450px; overflow:hidden;">
+						    			echo '<div class="col-lg-4 col-md-6 col-12"><div class="card" >
 						    					<img class="card-img-top" src="img/fundraising.jpg" >
 							    				<div class="card-body ">
 							    					<h5 class="card-title text-center">'.$row['fund_name'].'</h5>
