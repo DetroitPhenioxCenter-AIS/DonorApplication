@@ -2,16 +2,16 @@
 	
 	include_once 'Includes/db.php';
 	include_once 'mail.php';
-    
-
+    $event_string = '';
 if(isset($_POST['volunteer-submit'])){
 	$first_name = mysqli_real_escape_string($conn,$_POST['first-name']);
 	$last_name = mysqli_real_escape_string($conn,$_POST['last-name']);
-	$event_name = implode(',', $_POST['event']);
+	$event_name = implode(', ', $_POST['event']);
 	$number = mysqli_real_escape_string($conn,$_POST['phone']);
 	$email = mysqli_real_escape_string($conn,$_POST['email']);
 	$volunteer_type = mysqli_real_escape_string($conn,$_POST['reason']);
 	$address = mysqli_real_escape_string($conn,$_POST['address']);
+	
 	// Check for Empty Inputs 
 	if(empty($first_name) || empty($email) ||  empty($volunteer_type) ) {
 		
@@ -53,10 +53,15 @@ if(isset($_POST['volunteer-submit'])){
 											mysqli_stmt_bind_param($dbcon,"sssssss",$first_name,$last_name,$number,$email,$event_name,$volunteer_type,$address);
 											mysqli_stmt_execute($dbcon);
 										}
-							
-										volunteer_mail();
-										header("Location: thanks_registration.php?registration=success");
-		    							exit();
+									$sql = "SELECT * FROM volunteers WHERE email='$email';";
+									$result = mysqli_query($conn, $sql);
+									While($row = mysqli_fetch_assoc($result))
+										{
+											$event_string = $row['event_name'];
+										}
+									volunteer_mail($event_string);
+									header("Location: thanks_registration.php?registration=success");
+		    						exit();
 
 								} 
 

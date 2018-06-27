@@ -113,14 +113,14 @@
     						<div class="row">
     							<div class="col-lg-3 col-md-12">
     								<div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-									  <a class="nav-link active pt-3 pb-3 " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Creditcard/Debitcard</a>
-									  <a class="nav-link pt-3 pb-3  " id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Paypal</a>
-									  <a class="nav-link pt-3 pb-3 " id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Quickpay</a>
+									  <a class="nav-link active pt-3 pb-3 " id="v-pills-card-tab" data-toggle="pill" href="#v-pills-card" role="tab" aria-controls="v-pills-card" aria-selected="true">Creditcard/Debitcard</a>
+									  <a class="nav-link pt-3 pb-3  " id="v-pills-paypal-tab" data-toggle="pill" href="#v-pills-paypal" role="tab" aria-controls="v-pills-paypal" aria-selected="false">Paypal</a>
+									  <a class="nav-link pt-3 pb-3 " id="v-pills-quickpay-tab" data-toggle="pill" href="#v-pills-quickpay" role="tab" aria-controls="v-pills-quickpay" aria-selected="false">Quickpay</a>
 								     </div>
     							</div>
     							<div class="col-lg-9 col-md-12">
     								<div class="tab-content px-2" id="v-pills-tabContent">
-									  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+									  <div class="tab-pane fade show active" id="v-pills-card" role="tabpanel" aria-labelledby="v-pills-card-tab">
 									  	<div class="container">
 									  		<div class="row justify-content-md-center justify-content-sm-center">
 									  			<div class=" col-lg-8 col-md-10 col-sm-12  border mt-1 mb-2" >
@@ -237,9 +237,8 @@
 									  		</div>
 									  	</div>
 									  </div>
-									  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">B</div>
-									  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">a</div>
-									  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">d</div>
+									  <div class="tab-pane fade paypal" id="v-pills-paypal" role="tabpanel" aria-labelledby="v-pills-paypal-tab"><div class="py-3 text-center"><h1> COMING SOON</h1></div></div>
+									  <div class="tab-pane fade quickpay" id="v-pills-quickpay" role="tabpanel" aria-labelledby="v-pills-quickpay-tab"><div class="py-3 text-center"><h1> COMING SOON</h1></div></div>
 									</div>
 								</div>
     						</div>	
@@ -452,8 +451,8 @@
 									  				</div>
 									  			</div>
 											  </div>
-											  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-											  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+											  <div class="tab-pane fade paypal" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><div class="py-3 text-center"><h1> COMING SOON</h1></div></div>
+											  <div class="tab-pane fade quickpay" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><div class="py-3 text-center"><h1> COMING SOON</h1></div></div>
 											</div>        
                 							   
                 							<input type="hidden" name="fundid" id="fundid">                      

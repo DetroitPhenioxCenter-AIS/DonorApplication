@@ -88,3 +88,20 @@ html,body{
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.paypal{
+
+background-image: url(img/Paypal.jpg);
+height: 70vh;
+background-repeat: no-repeat;
+background-size:contain;
+background-position: center;
+}
+
+.quickpay{
+background-image: url(img/quickpay.png);
+height: 70vh;
+background-repeat: no-repeat;
+background-size:contain;
+background-position: center;
+}

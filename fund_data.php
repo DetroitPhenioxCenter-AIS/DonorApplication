@@ -4,9 +4,12 @@
   $username = $_SESSION['u_user_name'];
   include_once 'Includes/db.php';
   include_once 'mail.php';
-
-  
-	$id = mysqli_real_escape_string($conn,$_POST['fundid']);
+  	$id = mysqli_real_escape_string($conn,$_POST['fundid']);
+  	$fund_name = '';
+	$fund = "SELECT * FROM fundraiser WHERE fund_id='$id';";
+	$result = mysqli_query($conn,$fund);
+	while($row = mysqli_fetch_assoc($result)){ 
+		$fund_name = $row["fund_name"];}
 	$cardname = mysqli_real_escape_string($conn,$_POST['name']);
  	$cardnumber = mysqli_real_escape_string($conn,$_POST['cardnumber']);
  	$expdate = mysqli_real_escape_string($conn,$_POST['expdate']);
@@ -27,7 +30,7 @@
  		mysqli_query($conn, $sql3);
  		$_SESSION['u_total'] = $total_amount;
  	}
- 	fund_payment();
+ 	fund_payment($fund_name);
 
  	
 
