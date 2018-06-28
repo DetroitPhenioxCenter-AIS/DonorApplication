@@ -483,6 +483,7 @@
     							</div>
     							<div class="col-lg-6 col-12  mt-5 pl-1 pr-1 pt-3">
                                      <div class='pt-1 pb-1 pl-2 text-danger text-center' id="event-error">Please Enter All The Details </div>
+                                     <div class='pt-1 pb-1 pl-2 text-danger text-center' id="date-error">Please Enter the Event Date in MM-DD-YYYY format </div>
     								<form >
     									<div class="form-group">
 									  		<label for="event-name">Event Name</label>
@@ -537,6 +538,7 @@
       		$('.event-alert').hide();
       		$('#payment-error').hide();
       		$('.payment-alert').hide();
+      		$('#date-error').hide();
       	// fundraiser modal form submission
       	$('#fundraiser').click(function(){
       		var cardname = $('#modal_name').val();
@@ -580,11 +582,16 @@
       		var event_date = $('#event-date').val();
       		var event_venue = $('#event-venue').val();
       		var description = $('#description').val();
-
+      		var date_pattern = /(\d{2})-(\d{2})-(\d{4})/;
       		var data = 'event-name='+ event_name + '&event-date=' + event_date  + '&event-venue=' + event_venue + '&description=' + description;
       		if( event_name == "" || event_date == "" || event_venue == "" || description == "")
       		{
       			$('#event-error').show();
+      			return false;
+      		}
+
+      		 else if(!date_pattern.test(event_date)){
+      			$('#date-error').show();
       			return false;
       		}
       		else{
