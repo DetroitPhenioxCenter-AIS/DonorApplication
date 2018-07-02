@@ -19,9 +19,6 @@
        <link rel="stylesheet" href="styles.css">
        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
        <script type="text/javascript"> 
-      $(document).ready( function() {
-        $('#alert').delay(2000).fadeOut();
-      });
     </script>
       <title>Home</title>
    </head>
